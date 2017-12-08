@@ -1,6 +1,5 @@
 require(asreml)
-wd <- paste("D:/User/pschmidt/bwSyncAndShare/Yield Stability/examplecode")
-setwd(wd)
+getwd()
 GxEmeans <- read.delim("GxE_means.txt")
 
 ###################################

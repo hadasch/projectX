@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "setwd(getwd())\n",
+    "created" : 1512736002807.000,
+    "dirty" : true,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "1789287604",
+    "id" : "F1B95ABF",
+    "lastKnownWriteTime" : 7957660568423902208,
+    "last_content_update" : 1512736056829,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

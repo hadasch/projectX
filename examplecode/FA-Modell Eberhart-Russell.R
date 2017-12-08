@@ -23,5 +23,15 @@ VC_t <- data.frame(G     = unique(substr(VC$name,1,nchar(VC$name)-4)[1:(dim(VC)[
                    Var   = VC[which(substr(VC$name,nchar(VC$name)-2,nchar(VC$name))=="var"),"component"],
                    Lamda = VC[which(substr(VC$name,nchar(VC$name)-2,nchar(VC$name))=="fa1"),"component"])
 
+# BLUEs
+BLUEs <- predict(ER_fa_mod, classify="G")$pred$pvals[,c('G','predicted.value')]
+colnames(BLUEs) <- c("G","BLUE")
 
+# BLUPs
+BLUPs <- data.frame(name = names(ER_fa_mod$coefficients$random),
+                    BLUP = ER_fa_mod$coefficients$random)
+row.names(BLUPs) <- NULL
 
+# Predictions
+Preds <- predict(ER_fa_mod, classify="fa(G, k = 1):E")$pred$pvals[,c('G','E','predicted.value')]
+colnames(BLUEs) <- c("G","BLUE")

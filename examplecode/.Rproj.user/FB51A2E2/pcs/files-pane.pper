@@ -1,0 +1,9 @@
+{
+    "path" : "~/GitHub/projectX/examplecode",
+    "sortOrder" : [
+        {
+            "ascending" : true,
+            "columnIndex" : 2
+        }
+    ]
+}

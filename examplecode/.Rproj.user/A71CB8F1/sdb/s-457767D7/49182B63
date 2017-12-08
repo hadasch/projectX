@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "rm(list = ls())\nrequire(asreml)\nrequire(agridat)\nrequire(ggplot2)\n\n#####################################\n# Completely randomized Design      #\n# Single Trial                      #\n# fixed effects: ? (and gen)        #\n# random effects: none (except gen) #\n#####################################\n\n# Get Dataset\ncrddat <- cochran.crd[,c(1,2)] \ncolnames(crddat) <- c(\"yield\",\"gen\")\ncrddat <- subset(crddat, crddat$gen!=\"O\")\ncrddat$gen <- factor(crddat$gen)\nrownames(crddat) <- NULL\n\n# Genotype fixed\ng_fix <- asreml(yield ~ 1 + gen, data=crddat)\n# Genotype random\ng_ran  <- asreml(yield ~ 1, random=~ gen, data=crddat)\n\n# Model output\nvdblue <- predict(g_fix, classify=\"gen\")$pred$avsed^2\nGBLUEs <- predict(g_fix, classify=\"gen\")$pred$pvals[,c('gen','predicted.value')]\nVCg    <- summary(g_ran)$varcomp[1,'component']\nvdblup <- predict(g_ran, classify=\"gen\")$pred$avsed^2\nMu_ran <- g_ran$coefficients$fixed\nGBLUPs <- data.frame(g_ran$coefficients$random)\n\nGpreds <- data.frame(gen           = GBLUEs[,1],\n                     GBLUPs        = GBLUPs[,1], \n                     GBLUEs        = GBLUEs[,2],\n                     scaledGBLUEs1 = GBLUEs[,2]-Mu_ran, \n                     scaledGBLUEs2 = GBLUEs[,2]-mean(GBLUEs[,2]))\n\n# H^2 Piepho  = 0.6129861\nVCg / (VCg + vdblue/2)\n# H^2 Cullis  = 0.6129861\n1-(vdblup / 2 / VCg)\n# H^2 Reg (1) = 0.6129861\nH2reg1 <- lm(formula = Gpreds$GBLUPs ~ 0 + Gpreds$scaledGBLUEs1)$coefficients\n# H^2 Reg (2) = 0.6129861\nH2reg2 <- lm(formula = Gpreds$GBLUPs ~ 0 + Gpreds$scaledGBLUEs2)$coefficients\n# H^2 Reg (3) = 0.6129861\nH2reg3 <- lm(formula = Gpreds$GBLUPs ~     Gpreds$GBLUEs)$coefficients\n\nlm(formula = Gpreds$GBLUPs ~ 0 + Gpreds$scaledGBLUEs1)$coefficients\nlm(formula = Gpreds$GBLUPs ~ 0 + Gpreds$scaledGBLUEs2)$coefficients\nlm(formula = Gpreds$GBLUPs ~     Gpreds$GBLUEs)$coefficients\n\n# Prepare for Graph\na <- Gpreds[,c(1:3)]\na$source <- colnames(a)[3]\ncolnames(a)[3] <- \"estimate\"\nb <- Gpreds[,c(1,2,4)]\nb$source <- colnames(b)[3]\ncolnames(b)[3] <- \"estimate\"\nc <- Gpreds[,c(1,2,5)]\nc$source <- colnames(c)[3]\ncolnames(c)[3] <- \"estimate\"\nGpredgraph <- rbind(a,b,c)\n\n# Graph\nggplot(data=Gpredgraph, aes(y=GBLUPs,x=estimate,group=source, color=source)) + \n  geom_point(size=5) + \n  geom_abline(slope = H2reg1, col=\"blue\") +\n  geom_abline(intercept = H2reg3[1], slope = H2reg3[2], col=\"red\") +\n  ylab(\"Genotype BLUPs\") + xlab(\"Genotype BLUEs\") +\n  geom_hline(aes(yintercept=0)) +\n  geom_vline(aes(xintercept=0)) +\n  theme(axis.text  = element_text(size = 15)) +\n  theme(axis.title = element_text(size = 15)) +\n  theme(text       = element_text(size = 10)) +\n  xlim(-10,20) + ylim(-15,15)\n\n\n\n\n\n\n\n\n\n\n\n\nggplot(data=Gpreds, aes(y=GBLUPs,x=GBLUEs)) + \n  geom_point(size=5) +# geom_abline(slope = H2reg1) +\n  ylab(\"Genotype BLUPs\") + xlab(\"Genotype BLUEs\") +\n  geom_hline(aes(yintercept=0)) +\n  geom_vline(aes(xintercept=0)) +\n  theme(axis.text  = element_text(size = 15)) +\n  theme(axis.title = element_text(size = 15)) +\n  theme(text       = element_text(size = 10)) +\n  xlim(-20,20) + ylim(-20,20)\n\nggplot(data=Gpreds, aes(y=GBLUPs,x=scaledGBLUEs1)) + \n  geom_point(size=5) + geom_abline(slope = H2reg1) +\n  ylab(\"Genotype BLUPs\") + xlab(\"scaled genotype BLUEs (- Mu random)\") +\n  geom_hline(aes(yintercept=0)) +\n  geom_vline(aes(xintercept=0)) +\n  theme(axis.text  = element_text(size = 15)) +\n  theme(axis.title = element_text(size = 15)) +\n  theme(text       = element_text(size = 10)) +\n  xlim(-10,10) + ylim(-10,10)\n\n\n\n",
+    "created" : 1512742074337.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2951790906",
+    "id" : "49182B63",
+    "lastKnownWriteTime" : 1497027409,
+    "last_content_update" : 1497027409,
+    "path" : "D:/User/pschmidt/Desktop/H2/PublishScript/20170608 H2 in ASREML.R",
+    "project_path" : null,
+    "properties" : {
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

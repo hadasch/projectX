@@ -31,6 +31,8 @@ colnames(BLUEs) <- c("G","BLUE")
 BLUPs <- data.frame(name = names(ER_fa_mod$coefficients$random),
                     BLUP = ER_fa_mod$coefficients$random)
 row.names(BLUPs) <- NULL
+BLUPs$G <- substr(BLUPs$name,regexpr("1)_",BLUPs$name)+3,regexpr(":",BLUPs$name)-1)
+BLUPs$E <- substr(BLUPs$name,regexpr(":",BLUPs$name)+3,nchar(paste(BLUPs$name)))
 
 # Predictions
 Preds <- predict(ER_fa_mod, classify="fa(G, k = 1):E")$pred$pvals[,c('G','E','predicted.value')]

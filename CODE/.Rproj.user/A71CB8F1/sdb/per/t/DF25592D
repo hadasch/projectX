@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "rm(list = ls())\nsetwd(\"D:/User/pschmidt/Desktop/Rath/Final/Publication/\")\nplotdat <- read.delim(\"DATA/OUTPUT_H2_nur_eigene_VC.txt\")\n\nh2colors <- c(\"grey20\", \"grey30\", \"grey35\", \"grey40\", \n              \"grey55\", \"grey65\", \"grey75\", \"grey85\", \"grey90\")\n\n\n\npng(\"GRAPHS/H2 Bar Chart.png\", width = 1080, height = 720)\n\ng<-ggplot(data=plotdat, \n          aes(x=Data, y=Estimate, order=H_order, fill=reorder(Method, H_order))) +\n  geom_bar(stat=\"identity\", position=position_dodge(), colour=\"black\") +\n  ylab(\"Estimate\") + xlab(\"Dataset\") + ggtitle(\"H2 Estimates\") +\n  coord_cartesian(ylim = c(0.6, 1)) + \n  theme(legend.position = \"right\") +\n  scale_fill_manual(name=\"Method\", values = h2colors) +\n  theme(plot.title   = element_text(size=20),\n        axis.title.x = element_text(size=15),\n        axis.text.x  = element_text(size=20),\n        axis.title.y = element_text(size=15),\n        axis.text.y  = element_text(size=20),\n        legend.text  = element_text(size=15),\n        legend.title = element_text(size=15))\n\nprint(g)\ndev.off()",
+    "created" : 1513074692895.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "842474520",
+    "id" : "DF25592D",
+    "lastKnownWriteTime" : 1513075987,
+    "last_content_update" : 1513075987742,
+    "path" : "D:/User/pschmidt/Desktop/Rath/Final/Publication/SCRIPT/4 plot - bars.R",
+    "project_path" : null,
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 5,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "# Import\n  # Full Dataset for Dimensions (ny, nl, nr)\n    fulldat <- read.delim(\"DATA/full_dataset.txt\",sep=\"\",na.strings = \"NA\")\n    fulldat <- subset(fulldat, is.na(fulldat$y_value)==FALSE)\n    fulldat <- fulldat[which(fulldat$Sorti==sortis[d]),]\n    fulldat <- fulldat[which(fulldat$Var==var),]\n  # Estimated average residual\n    glimres_file <- paste(\"DATA/SAS Stage I export/\",sortis[d],\"_\",var,\"_Residual_glimm.txt\",sep=\"\")\n    glimres <- read.delim(glimres_file)\n\n#############################################################################\n# Get VC\nVCg    <- summary(g_ran)$varcomp[which(rownames(summary(g_ran)$varcomp)==\"G!G.var\")    ,'component']\nVCgy   <- summary(g_ran)$varcomp[which(rownames(summary(g_ran)$varcomp)==\"Y:G!Y.var\")  ,'component']\nVCgl   <- summary(g_ran)$varcomp[which(rownames(summary(g_ran)$varcomp)==\"L:G!L.var\")  ,'component']\nVCgyl  <- summary(g_ran)$varcomp[which(rownames(summary(g_ran)$varcomp)==\"Y:L:G!Y.var\"),'component']\nVCe    <- as.numeric(glimres[1])\n\nVC <- data.frame(y=\"both\", \n                 component=rownames(summary(g_ran)$varcomp),\n                 estimate=summary(g_ran)$varcomp[,'component'], \n                 VCorder=c(4,1,2,3,5,6,7,8))\nVC[which(VC$component==\"R!variance\"),'estimate'] <- VCe\nVC$component <- substr(VC$component,1,c(regexpr('!', VC$component))-1)\nVC[which(VC$component==\"R\"),'component'] <- \"error\"\nVC <- VC[order(VC$VCorder),]\nrownames(VC) <- NULL\n\n#############################################################################\n# Get Dimensions\nfulldat$Y_L     <- paste(fulldat$Y, fulldat$L,              sep=\"-\")\nfulldat$Y_L_Rep <- paste(fulldat$Y, fulldat$L, fulldat$Rep, sep=\"-\")\n\n# per genotype\nhowmany <- function(x){length(unique(x))}\ngn_y    <- data.frame(n_y=tapply(fulldat$Y,       fulldat$G, howmany))\ngn_l    <- data.frame(n_l=tapply(fulldat$L,       fulldat$G, howmany))\ngn_r    <- data.frame(n_r=tapply(fulldat$Rep,     fulldat$G, howmany))\ngn_yl   <- data.frame(n_r=tapply(fulldat$Y_L,     fulldat$G, howmany))\ngn_ylr  <- data.frame(n_r=tapply(fulldat$Y_L_Rep, fulldat$G, howmany))\n\n# n max\ngmn_y <- max(gn_y, na.rm = T)\ngmn_l <- max(gn_l, na.rm = T)\ngmn_r <- max(gn_r, na.rm = T)\n\n# n harmonic\nghn_y   <- harmonic.mean(gn_y,   na.rm = T)\nghn_l   <- harmonic.mean(gn_l,   na.rm = T)\nghn_r   <- harmonic.mean(gn_r,   na.rm = T)\nghn_yl  <- harmonic.mean(gn_yl,  na.rm = T)\nghn_ylr <- harmonic.mean(gn_ylr, na.rm = T)\n\n#trialdim <- data.frame(y=\"both\", gmn_y, ghn_y, geffn_y, gmn_l, ghn_l, geffn_l, gmn_r, ghn_r, geffn_r, ghn_yl, geffn_yl, ghn_ylr, geffn_ylr)\ntrialds <- data.frame(n_r  =c(gmn_r,            ghn_r,            ghn_r),\n                      n_y  =c(gmn_y,            ghn_y,            ghn_y), \n                      n_l  =c(gmn_l,            ghn_l,            ghn_l), \n                      n_yl =c(gmn_y*gmn_l,      ghn_y*ghn_l,      ghn_yl), \n                      n_ylr=c(gmn_y*gmn_l*gmn_r,ghn_y*ghn_l*ghn_r,ghn_ylr), \n                      row.names=c(\"max\",\"harmonic\",\"harmonic2\"))\ntrialds\n#############################################################################\n# Calculate phenotypic variance for H2_std and H2_Holland\nVCp_max <- VCg + \n  VCgy/gmn_y + \n  VCgl/gmn_l + \n  VCgyl/(gmn_y*gmn_l) + \n  VCe/(gmn_y*gmn_l*gmn_r)\nVCp_har <- VCg + \n  VCgy/ghn_y + \n  VCgl/ghn_l + \n  VCgyl/(ghn_y*ghn_l) + \n  VCe/(ghn_y*ghn_l*ghn_r)\nVCp_har2 <- VCg + \n  VCgy/ghn_y + \n  VCgl/ghn_l + \n  VCgyl/(ghn_yl) + \n  VCe/(ghn_ylr)\n",
+    "created" : 1513006617701.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3940231825",
+    "id" : "263EA8E7",
+    "lastKnownWriteTime" : 1513007381,
+    "last_content_update" : 1513007381017,
+    "path" : "D:/User/pschmidt/Desktop/Rath/Final/Publication/SCRIPT/3b standard & holland.R",
+    "project_path" : null,
+    "properties" : {
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "rm(list = ls())\nrequire(devEMF)\nsetwd(\"D:/User/pschmidt/Desktop/Rath/Final/Publication/\")\nplotdat <- read.delim(\"DATA/OUTPUT_H2.txt\")\n\nplotdat[which(plotdat$VC==plotdat$Data),]\n\nh2colors <- c(\"grey20\", \"grey30\", \"grey35\", \"grey40\", \n              \"grey55\", \"grey65\", \"grey75\", \"grey85\", \"grey90\")\n\n\n##############\n# Line Plot 1\nemf(\"GRAPHS/H2 line plot (per method).emf\", width = 10, height = 6)\n\ng<-ggplot(data=plotdat, \n          aes(x=reorder(Data, dataorder), y=Estimate, group=reorder(VC,dataorder) )) +\n  geom_line(aes(   color=reorder(VC,dataorder), \n                linetype=reorder(VC,dataorder)), size=1) +\n  geom_point(aes(  color=reorder(VC,dataorder)), size=3) +\n  geom_point(data=plotdat[which(plotdat$VC==plotdat$Data),],\n             aes(  color=\"red\", shape=\"b\")) +\n  \n  coord_cartesian(ylim=c(0.6,0.9)) +\n  xlab(\"Trial Design\") + ylab(c(expression(paste(H^2,\" estimate\", sep=\"\")))) +\n  scale_linetype_manual(name=\"Ursprung der \\nfixierten \\nVarianzkomponenten\",values=c(\"solid\", \"solid\",\n                                                                                      \"dashed\", \"dashed\")) +\n  scale_color_manual(name=\"Ursprung der \\nfixierten \\nVarianzkomponenten\",values=c(\"grey30\", \"grey70\",\n                                                                                   \"grey20\", \"grey60\",\"white\")) +\n  facet_wrap(~reorder(Method,H_order), nrow=3) +\n  theme(legend.position=\"right\")\n\nprint(g)\ndev.off()\n\n##############\n# Line Plot 2\n\nemf(\"GRAPHS/H2 line plot (per dataset).emf\", width = 10, height = 6)\n\ng<-ggplot(data=plotdat, \n          aes(x=reorder(Data, dataorder), y=Estimate, group=reorder(Method,H_order) )) +\n  geom_line(aes(   color=reorder(Method,H_order), \n                linetype=reorder(Method,H_order)), size=1)  +\n  geom_point(aes(  color=reorder(Method,H_order)), size=3) +\n  \n  coord_cartesian(ylim=c(0.6,1)) +\n  xlab(\"Trial Design\") + ylab(c(expression(paste(H^2,\" estimate\", sep=\"\")))) +\n  scale_linetype_manual(name=\"Ursprung der \\nfixierten \\nVarianzkomponenten\",\n                        values=c(\"solid\",\"solid\",\"dashed\",\"dashed\",\"dotted\")) +\n  scale_color_manual(name=\"Ursprung der \\nfixierten \\nVarianzkomponenten\",values=h2colors) +\n  facet_wrap(~reorder(VC,dataorder), nrow=2) +\n  theme(legend.position=\"right\")\n\nprint(g)\ndev.off()",
+    "created" : 1513074603944.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2852645768",
+    "id" : "643A6B62",
+    "lastKnownWriteTime" : 1513081127,
+    "last_content_update" : 1513081127286,
+    "path" : "D:/User/pschmidt/Desktop/Rath/Final/Publication/SCRIPT/4 plot - lines.R",
+    "project_path" : null,
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

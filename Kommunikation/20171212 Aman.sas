@@ -1,5 +1,5 @@
-PROC IMPORT OUT= WORK.aman 
-            DATAFILE= "D:\hpp\veroeff\17\BRRI\Corrected Final GG Aman Boro    09.08.2017.xlsx" 
+PROC IMPORT OUT= WORK.AMAN 
+            DATAFILE= "D:\User\pschmidt\Desktop\GitHub\projectX\DATA\20171212 Corrected Final GG Aman Boro    09.08.2017 (corrected).xlsx" 
             DBMS=EXCEL REPLACE;
      RANGE="Aman$"; 
      GETNAMES=YES;
@@ -8,6 +8,7 @@ PROC IMPORT OUT= WORK.aman
      USEDATE=YES;
      SCANTIME=YES;
 RUN;
+
 
 data aman;
 set aman;

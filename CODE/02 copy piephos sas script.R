@@ -60,6 +60,8 @@ shuklamod <- asreml(fixed   = adjmean ~ xj + tj,
                                              maxiter=100),
                     data    = dat3, ran.order = "user")
 
+shuklamod$coefficients$fixed
+
 # Format VC estimates
 shukla_vc  <- summary(shuklamod)$varcomp[2:3]
   vc_names <- rownames(shukla_vc)
@@ -77,20 +79,6 @@ shukla_vc <- shukla_vc[,c(3,1,2,5)]
 colnames(shukla_vc) <- c("VC","Estimate","StdErr","V")
 
 shukla_out <- subset(shukla_vc, is.na(shukla_vc$V)==F)
-
-# Display Results 
-require(ggplot2)
-
-ggplot(data=shukla_out,
-       aes(x=reorder(V,Estimate),
-           y=Estimate)) +
-  geom_point() +
-  geom_errorbar(aes(ymin=Estimate-StdErr, 
-                    ymax=Estimate+StdErr)) +
-  theme(axis.text.x  = element_text(angle=90, hjust=1),
-        axis.title.x = element_blank()) +
-  scale_y_continuous(name="Shukla's stability variance with s.e.",
-                     limits = c(0,max(shukla_out$Estimate+shukla_out$StdErr)))
 
 # Clean up
 rm(list=ls()[ls() %in% c("vc_names")])
@@ -133,3 +121,17 @@ FA_out <- merge(G_var, G_lam, by="VC")
 
 # Clean up
 rm(list=ls()[ls() %in% c("G_lam","G_var")])
+
+
+
+######### Plots #########
+#########################
+require(ggplot2)
+# GxE LS-means ~ Year
+source("11 Plot Yield-Year.R")
+adjmean_tj_plot
+adjmean_xj_plot
+
+# Shuklas Variances
+source("12 Plot Shuklas Variances.R")
+shuklaplot

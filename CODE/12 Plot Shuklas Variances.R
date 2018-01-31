@@ -1,3 +1,5 @@
+require(ggplot2)
+
 shuklaplot <- ggplot(data=shukla_out,
        aes(x=reorder(V,Estimate),
            y=Estimate)) +

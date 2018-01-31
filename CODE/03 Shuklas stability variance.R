@@ -19,7 +19,6 @@ shuklamod <- asreml(fixed   = adjmean ~ xj + tj,
                                              maxiter=100),
                     data    = dat3, ran.order = "user")
 
-shuklamod$coefficients$fixed
 
 # Format VC estimates
 shukla_vc  <- summary(shuklamod)$varcomp[2:3]
@@ -39,7 +38,14 @@ colnames(shukla_vc) <- c("VC","Estimate","StdErr","V")
 
 shukla_out <- subset(shukla_vc, is.na(shukla_vc$V)==F)
 
+# t-test for trends
+shukla_t_test=summary(shuklamod,all=T)$coef.fixed
+#Wald-test for trends
+shukla_wald_test=wald(shuklamod, denDF = c("none"),ssType = c("incremental","conditional"))#[4,4]
+
+
 write.table(shukla_out, paste(dataset,"_shukla.txt", sep=""), row.names = F, sep="\t")
+write.table(shukla_wald_test, paste(dataset,"_shukla_Wald_test.txt", sep=""), row.names = T, sep="\t")
 
 
 # Shuklas Variances

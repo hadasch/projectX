@@ -1,3 +1,5 @@
+require(ggplot2)
+
 # x-Axis: Trial Year
 adjmean_tj_plot <- ggplot(data=dat3,
 aes(x=tj, y=adjmean, colour=xj)) +

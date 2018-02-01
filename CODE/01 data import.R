@@ -5,9 +5,12 @@ amanraw <- read.delim("DATA/20171212 Corrected Final GG Aman 09.08.2017.txt")
 bororaw <- read.delim("DATA/20171212 Corrected Final GG Boro 09.08.2017.txt")
 setwd(wd)       #change back to original wd
 
+# Special formatting due to difference between datasets
+amanraw$tj  <- as.numeric(amanraw$Year)
+bororaw$tj  <- as.numeric(substr(bororaw$Year,1,4))
+
 # Format function
 format <- function(data){
-  data$tj  <- as.numeric(data$Year)
   data$Y   <- as.factor(data$Year)
   data$L   <- data$Location
   data$Env <- as.factor(paste(data$Y,data$L,sep="-"))

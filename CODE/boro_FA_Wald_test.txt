@@ -1,5 +1,5 @@
-"Df"	"Sum of Sq"	"Wald statistic"	"Pr(Chisq)"
-"(Intercept)"	1	471.962535888199	471.962535888199	0
-"xj"	1	10.9297663690559	10.9297663690559	0.000946314284311134
-"tj"	1	2.53653955151049	2.53653955151049	0.111238340490877
-"residual (MS)"	NA	1	NA	NA
+"Df"	"Wald statistic"	"Pr(Chisq)"
+"(Intercept)"	1	471.9626	"<0.0001"
+"xj"	1	10.9298	"0.0009"
+"tj"	1	2.5365	"0.1112"
+"residual (MS)"	NA	NA	NA

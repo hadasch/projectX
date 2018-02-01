@@ -4,7 +4,7 @@ require(asreml)
 
 #################
 dataset <- "aman"
-dataset <- "boro"
+#dataset <- "boro"
 #################
 
 dat3 <- read.delim(paste(dataset,"_means.txt",sep=""))
@@ -53,8 +53,9 @@ FA_wald_test=wald(FAmod, denDF = c("none"),ssType = c("incremental","conditional
 FA_wald_test[,c(2,3)] <- round(FA_wald_test[,c(2,3)],4)
 FA_wald_test$`Pr(Chisq)` <- ifelse(FA_wald_test$`Pr(Chisq)`<0.0001, "<0.0001",paste(FA_wald_test$`Pr(Chisq)`))
 
-
+# Residuals
+dat3$residFA <- FAmod$residuals
 
 write.table(FA_out, paste(dataset,"_FA.txt", sep=""), row.names = F, sep="\t")
 write.table(FA_wald_test, paste(dataset,"_FA_Wald_test.txt", sep=""), row.names = T, sep="\t")
-
+write.table(dat3, paste(dataset,"_resid_FA.txt", sep=""), row.names = F, sep="\t")

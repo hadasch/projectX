@@ -1,12 +1,10 @@
-#setwd("D:/User/pschmidt/Desktop/GitHub/projectX/CODE/03 Shuklas stability variance.R")
-
 # Shukla's Stability Variance
 #############################
 require(asreml)
 
 #################
 dataset <- "aman"
-#dataset <- "boro"
+dataset <- "boro"
 #################
 
 dat3 <- read.delim(paste(dataset,"_means.txt",sep=""))
@@ -39,11 +37,10 @@ shukla_vc$StabVar   <- as.factor(shukla_vc$StabVar)
 rownames(shukla_vc) <- NULL
 shukla_vc <- shukla_vc[,c(3,1,2,5)]
 colnames(shukla_vc) <- c("VC","Estimate","StdErr","V")
-shukla_vc[,c("Estimate","StdErr")] <- round(shukla_vc[,c("Estimate","StdErr")],4)
-
 shukla_out <- subset(shukla_vc, is.na(shukla_vc$V)==F)
-shukla_out <- shukla_out[,c("V","Estimate","StdErr")]
 
+shukla_out <- shukla_out[,c("V","Estimate","StdErr")]
+shukla_out[,c(2,3)] <- round(shukla_out[,c(2,3)],4)
 
 # t-test for trends
 shukla_t_test=summary(shuklamod,all=T)$coef.fixed
@@ -51,11 +48,14 @@ shukla_t_test=summary(shuklamod,all=T)$coef.fixed
 options(scipen=10) #change how numbers are displayed: NOT e-4 etc. 
 shukla_wald_test=wald(shuklamod, denDF = c("none"),ssType = c("incremental","conditional"))[,c(1,3,4)]
 shukla_wald_test[,c(2,3)] <- round(shukla_wald_test[,c(2,3)],4)
-shukla_wald_test$`Pr(Chisq)` <- ifelse(shukla_wald_test$`Pr(Chisq)`<0.0001, "<0.0001",paste(shukla_wald_test$`Pr(Chisq)`))
+
+# Residuals
+dat3$residShukla <- shuklamod$residuals
 
 # Export
 write.table(shukla_out, paste(dataset,"_shukla.txt", sep=""), row.names = F, sep="\t")
 write.table(shukla_wald_test, paste(dataset,"_shukla_Wald_test.txt", sep=""), row.names = T, sep="\t")
+write.table(dat3, paste(dataset,"_resid_Shukla.txt", sep=""), row.names = F, sep="\t")
 
 
 # Shuklas Variances

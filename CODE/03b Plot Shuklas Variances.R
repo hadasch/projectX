@@ -4,6 +4,7 @@ shuklaplot <- ggplot(data=shukla_out,
        aes(x=reorder(V,Estimate),
            y=Estimate)) +
   geom_point() +
+  ggtitle(dataset) +
   geom_errorbar(aes(ymin=Estimate-StdErr, 
                     ymax=Estimate+StdErr)) +
   theme(axis.text.x  = element_text(angle=90, hjust=1),

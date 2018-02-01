@@ -1,0 +1,61 @@
+---
+title: "Yield Trend & Stability Analyses"
+author: "S. Hadasch, P. Schmidt, H.-P. Piepho"
+date: "1 Februar 2018"
+output:
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+rm(list = ls()) 
+knitr::opts_chunk$set(echo = TRUE)
+dat <- read.delim("aman.txt")
+dat$Rep <- as.factor(dat$Rep)
+dat$Y <- as.factor(dat$Y)
+
+dat3 <- read.delim(paste("D:/User/pschmidt/Desktop/GitHub/projectX/examplecode/Tutorial Yield Trend and Stability Analyses/aman_means.txt",sep=""))
+dat3 <- dat3[order(dat3$G,dat3$Env),]
+dat3$Y <- as.factor(paste(dat3$Y))
+```
+
+## Rawdata
+
+The rawdata should be formatted like this:
+
+```{r}
+head(dat)
+```
+
+Where $Y$ and $t_j$ both represent the year of the trial, while the former is defined as a factor and the latter as an integer variables. $x_j$ is the year the respective genotype was released, $L$ is the location, $Env$ is the year-location-combination, $G$ is the genotype, $Rep$ is the replicate, $Group$ is the ??group?? and $Yield$ is the yield.
+
+```{r}
+str(dat)
+summary(dat)
+```
+
+## Stage I: genotype means per environment
+
+In order to do any yield trend and/ot yield stability analyses, genotype mean yields per environment are required.
+
+[...]
+
+```{r}
+str(dat3)
+```
+
+## Stage II: Shukla
+
+```{r, message=FALSE, results="hide"}
+require(asreml)
+
+shuklamod <- asreml(fixed   = adjmean ~ xj + tj,
+                    random  = ~ G + L + Y + L:G + Y:G + Y:L + at(G):Env, 
+                    ran.order = "user",
+                    weights = w,
+                    family  = asreml.gaussian(dispersion=1.0),
+                    control = asreml.control(pworkspace=8e10 ,
+                                             workspace=8e8, 
+                                             maxiter=100),
+                    data    = dat3)
+```
+

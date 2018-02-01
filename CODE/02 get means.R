@@ -1,3 +1,5 @@
+#setwd("D:/User/pschmidt/Desktop/GitHub/projectX/CODE")
+
 # Get means in Stage I
 #######################
 require(asreml)

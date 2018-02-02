@@ -1,51 +1,78 @@
 ---
 title: "Yield Trend & Stability Analyses"
-author: "S. Hadasch, P. Schmidt, H.-P. Piepho"
+author: "S. Hadasch, P. Schmidt & H.-P. Piepho"
 date: "1 Februar 2018"
 output:
+  word_document: default
   html_document: default
 ---
 
 ```{r setup, include=FALSE}
 rm(list = ls()) 
+require(ggplot2)
 knitr::opts_chunk$set(echo = TRUE)
 dat <- read.delim("aman.txt")
 dat$Rep <- as.factor(dat$Rep)
 dat$Y <- as.factor(dat$Y)
-
-dat3 <- read.delim(paste("D:/User/pschmidt/Desktop/GitHub/projectX/examplecode/Tutorial Yield Trend and Stability Analyses/aman_means.txt",sep=""))
-dat3 <- dat3[order(dat3$G,dat3$Env),]
-dat3$Y <- as.factor(paste(dat3$Y))
 ```
 
-## Rawdata
-
+### Rawdata
 The rawdata should be formatted like this:
 
-```{r}
+```{r head(dat)}
 head(dat)
 ```
 
 Where $Y$ and $t_j$ both represent the year of the trial, while the former is defined as a factor and the latter as an integer variables. $x_j$ is the year the respective genotype was released, $L$ is the location, $Env$ is the year-location-combination, $G$ is the genotype, $Rep$ is the replicate, $Group$ is the ??group?? and $Yield$ is the yield.
 
-```{r}
+```{r str+summary}
 str(dat)
 summary(dat)
 ```
 
-## Stage I: genotype means per environment
+### Stage I: genotype means per environment
+
+```{r Import Means, include=FALSE}
+dat3 <- read.delim(paste("D:/User/pschmidt/Desktop/GitHub/projectX/examplecode/Tutorial Yield Trend and Stability Analyses/aman_means.txt",sep=""))
+dat3 <- dat3[,-c(2,12)]
+dat3 <- dat3[order(dat3$G,dat3$Env),]
+dat3$Y <- as.factor(paste(dat3$Y))
+```
 
 In order to do any yield trend and/ot yield stability analyses, genotype mean yields per environment are required.
 
 [...]
 
-```{r}
+```{r str(dat3)}
 str(dat3)
 ```
 
-## Stage II: Shukla
+```{r Yield - tj Plot, echo=FALSE, warning=FALSE, }
+ggplot(data=dat3,
+aes(x=tj, y=adjmean, colour=xj)) +
+geom_jitter(width=0.25) +
+scale_y_continuous(name="LS-mean: genotype per environment (adjmean)",
+                   limits = c(0,max(dat3$adjmean))) +
+scale_x_continuous(name="Trial Year (tj)",
+                   breaks=seq(min(dat3$tj),max(dat3$tj),1)) +
+theme_bw() +
+theme(panel.grid.major.y = element_blank(),
+      panel.grid.minor   = element_blank(),
+      panel.border = element_blank(),
+      axis.text.x  = element_text(angle=90,hjust=1,vjust=0.5)) +
+scale_colour_gradient2("Registration\nyear (xj)",
+                       midpoint = median(dat3$xj),
+                       breaks = c(min(dat3$xj),
+                                  median(dat3$xj),
+                                  max(dat3$xj)),
+                       low ="orangered3",
+                       mid ="mediumspringgreen",
+                       high="navy")
+```
 
-```{r, message=FALSE, results="hide"}
+### Stage II: Shukla
+
+```{r Shukla Model, message=FALSE, results="hide"}
 require(asreml)
 
 shuklamod <- asreml(fixed   = adjmean ~ xj + tj,
@@ -59,3 +86,84 @@ shuklamod <- asreml(fixed   = adjmean ~ xj + tj,
                     data    = dat3)
 ```
 
+The variances can be accessed via `summary(shuklamod)$varcomp[2:3]`. After some formatting we find:
+
+```{r Shukla VC formatting, echo=FALSE}
+shukla_vc  <- summary(shuklamod)$varcomp[2:3]
+  vc_names <- rownames(shukla_vc)
+  vc_names <- substr(vc_names,1,regexpr('!',vc_names)-1)
+  vc_names <- gsub(")"," ",vc_names)
+  vc_names <- gsub("at\\(G, ","",vc_names)
+shukla_vc$VC <- as.factor(vc_names)
+shukla_vc$yesno <- "no"
+shukla_vc[which(regexpr(":Env",shukla_vc$VC)>0),"yesno"] <- "yes"
+shukla_vc$StabVar <- NA
+shukla_vc[which(shukla_vc$yesno=="yes"),"StabVar"] <- gsub(" :Env","",shukla_vc[which(shukla_vc$yesno=="yes"),"VC"])                          
+shukla_vc$StabVar   <- as.factor(shukla_vc$StabVar)
+shukla_vc <- shukla_vc[,c(3,1,2,5)]
+colnames(shukla_vc) <- c("VC","Estimate","StdErr","Variety")
+shukla_out <- subset(shukla_vc, is.na(shukla_vc$Variety)==F)
+shukla_out <- shukla_out[order(shukla_out$Variety),]
+rownames(shukla_out) <- NULL
+
+shukla_out <- shukla_out[,c("Variety","Estimate","StdErr")]
+shukla_out[,c(2,3)] <- round(shukla_out[,c(2,3)],4)
+shukla_out
+```
+
+```{r Shukla Plot, echo=FALSE}
+ggplot(data=shukla_out,
+       aes(x=reorder(Variety,Estimate),
+           y=Estimate)) +
+  geom_point() +
+  geom_errorbar(aes(ymin=Estimate-StdErr, 
+                    ymax=Estimate+StdErr)) +
+  theme(axis.text.x  = element_text(angle=90, hjust=1),
+        axis.title.x = element_blank()) +
+  scale_y_continuous(name="Shukla's stability variance with s.e.",
+                     limits = c(ifelse(min(shukla_out$Estimate-shukla_out$StdErr)<0,
+                                       min(shukla_out$Estimate-shukla_out$StdErr),0),
+                                max(shukla_out$Estimate+shukla_out$StdErr)))
+```
+
+### Stage II: Factor-Analytic Model
+
+```{r FA Model, message=FALSE, results="hide"}
+FAmod <- asreml(fixed   = adjmean ~ xj + tj,
+                random  = ~ G + L + Y + L:G + Y:G + fa(G):Env,
+                ran.order = "user",
+                weights = w,
+                family  = asreml.gaussian(dispersion=1.0),
+                control = asreml.control(pworkspace=8e10 ,
+                                         workspace=8e8, 
+                                         maxiter=100),
+                data    = dat3)
+```
+
+The variances and lambdas can again be accessed via `summary(FAmod)$varcomp[2:3]`. After some formatting we find:
+
+```{r FA VC formatting, echo=FALSE}
+FA_vc <- summary(FAmod)$varcomp[2:3]
+FA_vc$VC <- rownames(FA_vc)
+rownames(FA_vc) <- NULL
+FA_vc$isg   <- regexpr(":Env!G.",FA_vc$VC)
+FA_vc$isfa  <- regexpr(".fa1",FA_vc$VC) 
+FA_vc$group <- NA
+FA_vc[which(FA_vc$isg>1) ,"group"] <- "sigma"
+FA_vc[which(FA_vc$isfa>1),"group"] <- "lambda"
+FA_vc[which(is.na(FA_vc$group)==T),"VC"] <- substr(FA_vc[which(is.na(FA_vc$group)==T),"VC"],1,regexpr('!',FA_vc[which(is.na(FA_vc$group)==T),"VC"])-1)
+FA_vc$VC <- gsub("fa\\(G):Env!G.","",FA_vc$VC)
+FA_vc$VC <- gsub(".var","",FA_vc$VC)
+FA_vc$VC <- gsub(".fa1","",FA_vc$VC)
+FA_vc<-FA_vc[,c(3,1,2,6)]
+colnames(FA_vc) <- c("Variety","Estimate","StdErr","group")
+
+# Transposed Output
+G_var  <- subset(FA_vc, group=="sigma")[,-c(4)]
+colnames(G_var) <- c("Variety","Var_Est","Var_SE")
+G_lam  <- subset(FA_vc, group=="lambda")[,-c(4)]
+colnames(G_lam) <- c("Variety","Lambda_Est","Lambda_SE")
+FA_out <- merge(G_var, G_lam, by="Variety")
+FA_out[,c(2,3,4,5)] <- round(FA_out[,c(2,3,4,5)],4)
+FA_out
+```

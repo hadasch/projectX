@@ -1,24 +1,27 @@
 ---
 title: "Model Comparison"
 author: "Hadasch, Schmidt, Piepho"
-date: "1 Februar 2018"
-output: html_document
+date: "05 Februar 2018"
+output:
+  html_document: default
 ---
+
+
 
 ```{r setup, include=FALSE}
 require(asreml)
 options(scipen=4)
 #################
 dataset <- "aman"
-#dataset <- "boro"
+dataset <- "boro"
 #################
 dat3 <- read.delim(paste(dataset,"_means.txt",sep=""))
 dat3 <- dat3[order(dat3$G,dat3$Env),]
 dat3$Y <- as.factor(paste(dat3$Y))
 ```
 
-# General Information
-* Dataset = `r dataset`
+# Contents of this file:
+#### Dataset = `r dataset`
 * Models:
     + `G:Env` Standard Model  
     + `at(G):Env` Shukla Model
@@ -33,7 +36,7 @@ dat3$Y <- as.factor(paste(dat3$Y))
 
 ## Standard Model
 ```{r Standard Model, results="hide", fig.show="hide"}
-standard <- asreml(fixed   = adjmean ~ xj + tj,
+standard <- asreml(fixed   = adjmean ~ ri + tj,
                    random  = ~ G + L + Y + L:G + Y:G + G:Env,
                    ran.order = "user",
                    weights = w,
@@ -51,7 +54,7 @@ plot(dat3$tj,residuals(standard, type=("pearson")))
 
 ## Shukla's Stability Variance
 ```{r Shukla Model, results="hide", fig.show="hide"}
-shukla <- asreml(fixed   = adjmean ~ xj + tj,
+shukla <- asreml(fixed   = adjmean ~ ri + tj,
                     random  = ~ G + L + Y + L:G + Y:G + Y:L + at(G):Env, 
                     ran.order = "user",
                     weights = w,
@@ -89,7 +92,7 @@ plot(dat3$tj,residuals(shukla, type=("pearson")))
 
 ## Factor-Analytic Model
 ```{r FA Model, results="hide", fig.show="hide"}
-FAmod <- asreml(fixed   = adjmean ~ xj + tj,
+FAmod <- asreml(fixed   = adjmean ~ ri + tj,
                 random  = ~ G + L + Y + L:G + Y:G + fa(G):Env,
                 ran.order = "user",
                 weights = w,
@@ -130,11 +133,11 @@ FA_out
 plot(dat3$tj,residuals(FAmod, type=("pearson")))
 ```
 
-## 5-year chunk variances
+## 5-Year-Chunk Variances
 ```{r fiveyr Model, results="hide", fig.show="hide"}
 dat3$fiveyr <- as.factor(ceiling((dat3$tj-2000)/5)) #Create three 5-year groups from tj
 
-fiveyr <- asreml(fixed   = adjmean ~ xj + tj,
+fiveyr <- asreml(fixed   = adjmean ~ ri + tj,
                  random  = ~ G + L + Y + L:G + Y:G + diag(fiveyr):Env:G,
                  ran.order = "user",
                  weights = w,

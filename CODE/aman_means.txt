@@ -1,4 +1,4 @@
-"Env"	"GG"	"Y"	"tj"	"xj"	"L"	"G"	"Group"	"arimean"	"adjmean"	"se"	"ErrVar"	"w"
+"Env"	"GG"	"Y"	"tj"	"ri"	"L"	"G"	"Group"	"arimean"	"adjmean"	"se"	"ErrVar"	"w"
 "2001-Barisal"	"Aromatic-BR5"	"2001"	2001	1976	"Barisal"	"BR5"	"Aromatic"	2.47666666666667	2.47666666666667	0.130270249273229	0.0169703378457092	58.9263460216169
 "2001-Barisal"	"Aromatic-BRRI dhan34"	"2001"	2001	1997	"Barisal"	"BRRI dhan34"	"Aromatic"	2.22666666666667	2.22666666666667	0.130270249273229	0.0169703378457092	58.9263460216168
 "2001-Barisal"	"Aromatic-BRRI dhan37"	"2001"	2001	1998	"Barisal"	"BRRI dhan37"	"Aromatic"	2.35	2.35	0.130270249273229	0.0169703378457092	58.9263460216168

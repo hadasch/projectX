@@ -1,12 +1,10 @@
-#setwd("D:/User/pschmidt/Desktop/GitHub/projectX/CODE")
-
 # Get means in Stage I
 #######################
 require(asreml)
 
 #################
 dataset <- "aman"
-dataset <- "boro"
+#dataset <- "boro"
 #################
 
 dat <- read.delim(paste(dataset,".txt",sep=""))

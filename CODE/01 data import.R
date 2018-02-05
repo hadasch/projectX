@@ -15,9 +15,9 @@ format <- function(data){
   data$L   <- data$Location
   data$Env <- as.factor(paste(data$Y,data$L,sep="-"))
   data$Rep <- as.factor(data$Rep)
-  data$xj  <- as.numeric(data$Year.of.release)
+  data$ri  <- as.numeric(data$Year.of.release)
   data$G   <- data$Variety
-  data <- data[,c("Y","tj","xj","L","Env","G","Rep","Group","Yield")]
+  data <- data[,c("Y","tj","ri","L","Env","G","Rep","Group","Yield")]
   data <- subset(data, is.na(data$Yield)==F)
   return(data)
 }
@@ -45,4 +45,4 @@ info_boro <- info(boro)
 write.table(aman,"aman.txt",sep="\t",row.names=F)
 write.table(boro,"boro.txt",sep="\t",row.names=F)
 
-# Group:G - sind doppelte möglich?
+# Group:G - sind doppelte moeglich?

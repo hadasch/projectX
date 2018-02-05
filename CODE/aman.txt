@@ -1,4 +1,4 @@
-"Y"	"tj"	"xj"	"L"	"Env"	"G"	"Rep"	"Group"	"Yield"
+"Y"	"tj"	"ri"	"L"	"Env"	"G"	"Rep"	"Group"	"Yield"
 "2001"	2001	1980	"Barisal"	"2001-Barisal"	"BR10"	"1"	"Long"	3.5
 "2001"	2001	1980	"Comilla"	"2001-Comilla"	"BR10"	"1"	"Long"	5.011046512
 "2001"	2001	1980	"Gazipur"	"2001-Gazipur"	"BR10"	"1"	"Long"	4.280232558

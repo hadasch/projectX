@@ -1,7 +1,7 @@
 # rm(list = ls())
 #################
 dataset <- "aman"
-#dataset <- "boro"
+dataset <- "boro"
 #################
 
 dat3 <- read.delim(paste(dataset,"_means.txt",sep=""))
@@ -10,7 +10,7 @@ dat3$Y <- as.factor(paste(dat3$Y))
 
 require(asreml)
 # Get residuals from standard model
-standard <- asreml(fixed   = adjmean ~ xj + tj,
+standard <- asreml(fixed   = adjmean ~ ri + tj,
                 random  = ~ G + L + Y + L:G + Y:G + at(G):Env,
                 ran.order = "user",
                 weights = w,

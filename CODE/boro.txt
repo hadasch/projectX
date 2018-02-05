@@ -1,4 +1,4 @@
-"Y"	"tj"	"xj"	"L"	"Env"	"G"	"Rep"	"Group"	"Yield"
+"Y"	"tj"	"ri"	"L"	"Env"	"G"	"Rep"	"Group"	"Yield"
 "2001-2002"	2001	1970	"Barisal"	"2001-2002-Barisal"	"BR1"	"1"	"Short"	6.12
 "2001-2002"	2001	1970	"Bhanga"	"2001-2002-Bhanga"	"BR1"	"1"	"Short"	5.8
 "2001-2002"	2001	1970	"Comilla"	"2001-2002-Comilla"	"BR1"	"1"	"Short"	6.87

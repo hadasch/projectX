@@ -1,11 +1,9 @@
 ---
-title: "Model Comparison Part II: Random Regressions"
+title: 'Model Comparison Part II: Random Regressions'
 author: "Hadasch, Schmidt, Piepho"
-date: "2 Februar 2018"
-output: html_document
-classoption: fleqn
-header-includes:
-- \setlength{\mathindent}{0pt}
+date: "05 Februar 2018"
+output:
+  html_document: default
 ---
 
 
@@ -14,7 +12,7 @@ require(asreml)
 options(scipen=4)
 #################
 dataset <- "aman"
-#dataset <- "boro"
+dataset <- "boro"
 #################
 dat3 <- read.delim(paste(dataset,"_means.txt",sep=""))
 dat3 <- dat3[order(dat3$G,dat3$Env),]
@@ -28,7 +26,7 @@ dat3$Y <- as.factor(paste(dat3$Y))
         var(GL)  &= \sigma_{GL}^2 \\
         var(GY)  &= \sigma_{GY}^2 \\
         var(GYL) &=           \sigma_{GYL}^2 + 
-                    \sqrt{x_j}\sigma_{GYL}^2 + 
+                    \sqrt{r_i}\sigma_{GYL}^2 + 
                     \sqrt{t_j}\sigma_{GYL}^2 
        \end{aligned}$  
 * Mod2: 
@@ -36,35 +34,35 @@ dat3$Y <- as.factor(paste(dat3$Y))
         var(GL)  &= \sigma_{GL}^2 \\
         var(GY)  &= \sigma_{GY}^2 \\
         var(GYL) &=           \sigma_{GYL}^2 + 
-                    \sqrt{x_j}\sigma_{GYL}^2 + 
-                          x_j \sigma_{GYL}^2 + 
+                    \sqrt{r_i}\sigma_{GYL}^2 + 
+                          r_i \sigma_{GYL}^2 + 
                     \sqrt{t_j}\sigma_{GYL}^2 + 
                           t_j \sigma_{GYL}^2 
        \end{aligned}$
 * Mod3: 
     + $\begin{aligned}
         var(GL)  &=           \sigma_{GL}^2 + 
-                    \sqrt{x_j}\sigma_{GL}^2 \\ 
+                    \sqrt{r_i}\sigma_{GL}^2 \\ 
         var(GY)  &=           \sigma_{GY}^2 + 
-                    \sqrt{x_j}\sigma_{GY}^2 + 
+                    \sqrt{r_i}\sigma_{GY}^2 + 
                     \sqrt{t_j}\sigma_{GY}^2 \\
         var(GYL) &=           \sigma_{GYL}^2 + 
-                    \sqrt{x_j}\sigma_{GYL}^2 + 
+                    \sqrt{r_i}\sigma_{GYL}^2 + 
                     \sqrt{t_j}\sigma_{GYL}^2 
        \end{aligned}$
 * Mod4: 
     + $\begin{aligned}
         var(GL)  &=           \sigma_{GL}^2 + 
-                    \sqrt{x_j}\sigma_{GL}^2 +
-                          x_j \sigma_{GL}^2 \\ 
+                    \sqrt{r_i}\sigma_{GL}^2 +
+                          r_i \sigma_{GL}^2 \\ 
         var(GY)  &=           \sigma_{GY}^2 + 
-                    \sqrt{x_j}\sigma_{GY}^2 +
-                          x_j \sigma_{GY}^2 +
+                    \sqrt{r_i}\sigma_{GY}^2 +
+                          r_i \sigma_{GY}^2 +
                     \sqrt{t_j}\sigma_{GY}^2 +
                           t_j \sigma_{GY}^2 \\
         var(GYL) &=           \sigma_{GYL}^2 + 
-                    \sqrt{x_j}\sigma_{GYL}^2 + 
-                          x_j \sigma_{GYL}^2 +
+                    \sqrt{r_i}\sigma_{GYL}^2 + 
+                          r_i \sigma_{GYL}^2 +
                     \sqrt{t_j}\sigma_{GYL}^2 +
                           t_j \sigma_{GYL}^2
        \end{aligned}$
@@ -74,25 +72,28 @@ dat3$Y <- as.factor(paste(dat3$Y))
     + Variance Components: `summary(MODELOBJECT)$varcomp`
     + Residual Plot per $t_j$: `plot(dat3$tj,residuals(MODELOBJECT, type=("pearson")))`
 
-### Create variables from xj and tj 
-```{r xjtj}
+### Create variables from ri and tj 
+```{r ritj}
 # "Centered" and squareroot
-dat3$sc_xj <- sqrt(dat3$xj-min(dat3$xj))
-dat3$sc_tj <- sqrt(dat3$tj-min(dat3$tj)) 
-# "Centered"
-dat3$c_xj   <- dat3$xj-min(dat3$xj)
-dat3$c_tj   <- dat3$tj-min(dat3$tj)
+dat3$sc_ri <- sqrt(dat3$ri - min(dat3$ri)+1)
+dat3$sc_tj <- sqrt(dat3$tj - min(dat3$tj)+1) 
+# "Centered" 
+dat3$c_ri  <- dat3$ri - min(dat3$ri)+1
+dat3$c_tj  <- dat3$tj - min(dat3$tj)+1
+
+# Display "centered" c_tj levels
+unique(dat3$c_tj)
 ```
 
 
 ## Model 1
 
 ```{r Mod1 Gpar, include=FALSE}
-Mod1 <- asreml(fixed   = adjmean ~ xj + tj,
+Mod1 <- asreml(fixed   = adjmean ~ ri + tj,
                  random  = ~ G + L + Y + G:L + G:Y + 
                                       G:Env + 
                              sc_tj:G:Env + 
-                             sc_xj:G:Env,
+                             sc_ri:G:Env,
                  ran.order = "user",
                  weights = w,
                  family  = asreml.gaussian(dispersion=1.0),
@@ -105,11 +106,11 @@ Gpar$Constraint[7:8] <- "U"
 ```
 
 ```{r Mod1, results="hide", fig.show="hide"}
-Mod1 <- asreml(fixed   = adjmean ~ xj + tj,
+Mod1 <- asreml(fixed   = adjmean ~ ri + tj,
                  random  = ~ G + L + Y + G:L + G:Y + 
                              G:Env + 
                              sc_tj:G:Env + 
-                             sc_xj:G:Env,
+                             sc_ri:G:Env,
                  ran.order = "user",
                  G.param = Gpar,
                  weights = w,
@@ -128,11 +129,11 @@ plot(dat3$tj,residuals(Mod1, type=("pearson")))
 ## Model 2
 
 ```{r Mod2 Gpar, include=FALSE}
-Mod2 <- asreml(fixed   = adjmean ~ xj + tj,
+Mod2 <- asreml(fixed   = adjmean ~ ri + tj,
                  random  = ~ G + L + Y + G:L + G:Y + 
                                       G:Env + 
                              sc_tj:G:Env + c_tj:G:Env +
-                             sc_xj:G:Env + c_xj:G:Env,
+                             sc_ri:G:Env + c_ri:G:Env,
                  ran.order = "user",
                  weights = w,
                  family  = asreml.gaussian(dispersion=1.0),
@@ -145,11 +146,11 @@ Gpar$Constraint[7:10] <- "U"
 ```
 
 ```{r Mod2, results="hide", fig.show="hide"}
-Mod2 <- asreml(fixed   = adjmean ~ xj + tj,
+Mod2 <- asreml(fixed   = adjmean ~ ri + tj,
                  random  = ~ G + L + Y + G:L + G:Y + 
                                    G:Env + 
                              sc_tj:G:Env + c_tj:G:Env +
-                             sc_xj:G:Env + c_xj:G:Env,
+                             sc_ri:G:Env + c_ri:G:Env,
                  ran.order = "user",
                  G.param = Gpar,
                  weights = w,
@@ -171,11 +172,11 @@ plot(dat3$tj,residuals(Mod2, type=("pearson")))
 ## Model 3
 
 ```{r Mod3 Gpar, include=FALSE}
-Mod3 <- asreml(fixed   = adjmean ~ xj + tj,
+Mod3 <- asreml(fixed   = adjmean ~ ri + tj,
                random  = ~ G + L + Y + 
-                           G:L   + sc_xj:G:L   + 
-                           G:Y   + sc_xj:G:Y   + sc_tj:G:Y   +
-                           G:Env + sc_xj:G:Env + sc_tj:G:Env,
+                           G:L   + sc_ri:G:L   + 
+                           G:Y   + sc_ri:G:Y   + sc_tj:G:Y   +
+                           G:Env + sc_ri:G:Env + sc_tj:G:Env,
                ran.order = "user",
                weights = w,
                family  = asreml.gaussian(dispersion=1.0),
@@ -188,11 +189,11 @@ Gpar$Constraint[c(5,7,8,10,11)] <- "U"
 ```
 
 ```{r Mod3, results="hide", fig.show="hide"}
-Mod3 <- asreml(fixed   = adjmean ~ xj + tj,
+Mod3 <- asreml(fixed   = adjmean ~ ri + tj,
                  random  = ~ G + L + Y + 
-                           G:L   + sc_xj:G:L   + 
-                           G:Y   + sc_xj:G:Y   + sc_tj:G:Y   +
-                           G:Env + sc_xj:G:Env + sc_tj:G:Env,
+                           G:L   + sc_ri:G:L   + 
+                           G:Y   + sc_ri:G:Y   + sc_tj:G:Y   +
+                           G:Env + sc_ri:G:Env + sc_tj:G:Env,
                  ran.order = "user",
                  G.param = Gpar,
                  weights = w,
@@ -214,14 +215,14 @@ plot(dat3$tj,residuals(Mod3, type=("pearson")))
 ## Model 4
 
 ```{r Mod4 Gpar, include=FALSE}
-Mod4 <- asreml(fixed   = adjmean ~ xj + tj,
+Mod4 <- asreml(fixed   = adjmean ~ ri + tj,
                random  = ~ G + L + Y + 
-                           G:L   + sc_xj:G:L   + 
-                                    c_xj:G:L   +
-                           G:Y   + sc_xj:G:Y   + sc_tj:G:Y   +
-                                    c_xj:G:Y   +  c_tj:G:Y   +
-                           G:Env + sc_xj:G:Env + sc_tj:G:Env +
-                                    c_xj:G:Env +  c_tj:G:Env,
+                           G:L   + sc_ri:G:L   + 
+                                    c_ri:G:L   +
+                           G:Y   + sc_ri:G:Y   + sc_tj:G:Y   +
+                                    c_ri:G:Y   +  c_tj:G:Y   +
+                           G:Env + sc_ri:G:Env + sc_tj:G:Env +
+                                    c_ri:G:Env +  c_tj:G:Env,
                ran.order = "user",
                weights = w,
                family  = asreml.gaussian(dispersion=1.0),
@@ -234,14 +235,14 @@ Gpar$Constraint[c(5,6,8,9,10,11,13,14,15,16)] <- "U"
 ```
 
 ```{r Mod4}
-Mod4 <- asreml(fixed   = adjmean ~ xj + tj,
+Mod4 <- asreml(fixed   = adjmean ~ ri + tj,
                  random  = ~ G + L + Y + 
-                           G:L   + sc_xj:G:L   + 
-                                    c_xj:G:L   +
-                           G:Y   + sc_xj:G:Y   + sc_tj:G:Y   +
-                                    c_xj:G:Y   +  c_tj:G:Y   +
-                           G:Env + sc_xj:G:Env + sc_tj:G:Env +
-                                    c_xj:G:Env +  c_tj:G:Env,
+                           G:L   + sc_ri:G:L   + 
+                                    c_ri:G:L   +
+                           G:Y   + sc_ri:G:Y   + sc_tj:G:Y   +
+                                    c_ri:G:Y   +  c_tj:G:Y   +
+                           G:Env + sc_ri:G:Env + sc_tj:G:Env +
+                                    c_ri:G:Env +  c_tj:G:Env,
                  ran.order = "user",
                  G.param = Gpar,
                  weights = w,

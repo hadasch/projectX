@@ -4,7 +4,7 @@ require(asreml)
 
 #################
 dataset <- "aman"
-#dataset <- "boro"
+dataset <- "boro"
 #################
 
 dat3 <- read.delim(paste(dataset,"_means.txt",sep=""))
@@ -12,7 +12,7 @@ dat3 <- dat3[order(dat3$G,dat3$Env),]
 dat3$Y <- as.factor(paste(dat3$Y))
 
 
-FAmod <- asreml(fixed   = adjmean ~ xj + tj,
+FAmod <- asreml(fixed   = adjmean ~ ri + tj,
                 random  = ~ G + L + Y + L:G + Y:G + fa(G):Env,
                 weights = w,
                 family  = asreml.gaussian(dispersion=1.0),

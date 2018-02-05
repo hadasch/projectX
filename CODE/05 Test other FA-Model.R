@@ -20,7 +20,7 @@ dat3$Y <- as.factor(paste(dat3$Y))
 dat3$fiveyr <- as.factor(ceiling((dat3$tj-2000)/5))
 unique(dat3[c("tj", "fiveyr")])
 
-fiveyr <- asreml(fixed  = adjmean ~ xj + tj,
+fiveyr <- asreml(fixed  = adjmean ~ ri + tj,
                 random  = ~ G + L + Y + L:G + Y:G + 
                             diag(fiveyr):Env:G,
                 weights = w,
@@ -37,7 +37,7 @@ plot(dat3$tj,residuals(fiveyr, type=("pearson")))
 # Random regression
 dat3$sqrt_centered_tj <- sqrt(dat3$tj-2000)
 
-randreg <- asreml(fixed  = adjmean ~ xj + tj,
+randreg <- asreml(fixed  = adjmean ~ ri + tj,
                  random  = ~ G + L + Y + L:G + Y:G + 
                              Env:G + sqrt_centered_tj:Env:G,
                  weights = w,

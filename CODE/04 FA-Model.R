@@ -42,8 +42,10 @@ G_var  <- subset(FA_vc, group=="sigma")[,-c(4)]
 colnames(G_var) <- c("VC","Var_Est","Var_SE")
 G_lam  <- subset(FA_vc, group=="lambda")[,-c(4)]
 colnames(G_lam) <- c("VC","Lambda_Est","Lambda_SE")
+G_lam$Lambda_StdEst <- G_lam$Lambda_Est/(mean(G_lam$Lambda_Est))
+
 FA_out <- merge(G_var, G_lam, by="VC")
-FA_out[,c(2,3,4,5)] <- round(FA_out[,c(2,3,4,5)],4)
+FA_out[,c(2,3,4,5,6)] <- round(FA_out[,c(2,3,4,5,6)],4)
 
 # t-test for trends
 FA_t_test=summary(FAmod,all=T)$coef.fixed

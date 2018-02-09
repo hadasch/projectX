@@ -3,7 +3,7 @@ require(asreml)
 options(scipen=4)
 #################
 dataset <- "aman"
-#dataset <- "boro"
+dataset <- "boro"
 #################
 dat3 <- read.delim(paste(dataset,"_means.txt",sep=""))
 dat3 <- dat3[order(dat3$G,dat3$Env),]
@@ -17,7 +17,7 @@ unique(dat3$ri-min(dat3$ri))
 unique(dat3$tj-min(dat3$tj))
 
 # Set up model construction set
-RP1 <- data.frame(part1 ="random=~ G + L + Y + G:L + G:Y + G:Env",
+RP1 <- data.frame(part1 ="random=~ G + L + Y + Y:L + G:L + G:Y + G:Env",
        riGL  ="+ sc_ri:G:L",
        riGY  ="+ sc_ri:G:Y",
        tjGY  ="+ sc_tj:G:Y",

@@ -13,7 +13,8 @@ dat3$Y <- as.factor(paste(dat3$Y))
 
 
 FAmod <- asreml(fixed   = adjmean ~ ri + tj,
-                random  = ~ G + L + Y + L:G + Y:G + fa(G):Env,
+                random  = ~ G + L + Y + Y:L +
+                            L:G + Y:G + fa(G):Env,
                 weights = w,
                 family  = asreml.gaussian(dispersion=1.0),
                 control = asreml.control(pworkspace=8e10 ,

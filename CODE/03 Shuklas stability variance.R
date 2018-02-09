@@ -12,7 +12,8 @@ dat3 <- dat3[order(dat3$G,dat3$Env),]
 dat3$Y <- as.factor(paste(dat3$Y))
 
 shuklamod <- asreml(fixed   = adjmean ~ ri + tj,
-                    random  = ~ G + L + Y + L:G + Y:G + Y:L + at(G):Env, 
+                    random  = ~ G + L + Y + Y:L + 
+                                L:G + Y:G  + at(G):Env, 
                     #rcov    = ~ at(G):Y:L, #Fehlermeldung?!
                     weights = w,
                     family  = asreml.gaussian(dispersion=1.0),

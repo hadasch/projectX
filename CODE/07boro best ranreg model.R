@@ -97,6 +97,7 @@ breaks$exp <- as.expression(breaks$xlab)
 
 a <- fullVC[          "G:Y!G.var","component"]
 b <- fullVC["sc_ri:G:Y!sc_ri.var","component"]
+size <- 20
 
 require(ggplot2)
 g <- ggplot() +
@@ -110,10 +111,22 @@ g <- ggplot() +
   ylab(expression(Var(GY))) +
   annotate("text",x=1.5,y=0.021,colour="blue",
            label=paste0("y=",round(a,3),round(b,5),"x")) +
-  theme(axis.text.x  = element_text(angle=90, hjust=1, vjust=0.5))
+  theme(axis.text.x     =element_text(angle=90, hjust=1,   vjust=0.5, size=0.5*size),
+        axis.text.x.top =element_text(angle=0,  hjust=0.5, vjust=0.5, size=size),
+        axis.title.x.top=element_text(size=size),
+        axis.title.x    =element_text(size=size),
+        axis.text.y     =element_text(size=0.5*size),
+        axis.title.y    =element_text(size=size))
   
-pdf("boro ranreg.pdf", width = 11, height = 5)
+pdf("boro ranreg.pdf", width = 9, height = 4)
   print(g)
 dev.off()
 
+output <- rGYVC[,c(1,2,3,4)]
+output$component <- round(output$component, 8)
+output$sc_ri <- round(output$sc_ri, 2)
+
+write.table(output, 
+            paste(dataset,"_bororanreg_at(G).txt", sep=""), 
+            row.names = F, sep="\t")
 

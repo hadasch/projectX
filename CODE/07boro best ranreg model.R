@@ -89,6 +89,7 @@ abline(a=fullVC[          "G:Y!G.var","component"],
 
 
 
+
 # ggplot
 rGYVC$xlab <- paste0("sqrt(",rGYVC$ri,")")
 
@@ -98,6 +99,11 @@ breaks$exp <- as.expression(breaks$xlab)
 a <- fullVC[          "G:Y!G.var","component"]
 b <- fullVC["sc_ri:G:Y!sc_ri.var","component"]
 size <- 20
+
+# R2
+rGYVC$SQx <- (rGYVC$sc_ri- mean(rGYVC$sc_ri))^2
+rGYVC$SQy <- (rGYVC$component- mean(rGYVC$component))^2
+(sum(rGYVC$SQx)*b^2)/sum(rGYVC$SQy)
 
 require(ggplot2)
 g <- ggplot() +

@@ -1,10 +1,13 @@
 # FA-model Eberhart-Russel
 ##########################
 require(asreml)
+require(data.table)
+require(nadiv)
+require(stringr)
 
 #################
 dataset <- "aman"
-dataset <- "boro"
+#dataset <- "boro"
 #################
 
 dat3 <- read.delim(paste(dataset,"_means.txt",sep=""))
@@ -22,31 +25,22 @@ FAmod <- asreml(fixed   = adjmean ~ ri + tj,
                                          maxiter=100),
                 data    = dat3, ran.order = "user")
 
-# Format VC estimates
-FA_vc <- summary(FAmod)$varcomp[2:3]
-FA_vc$VC <- rownames(FA_vc)
-rownames(FA_vc) <- NULL
-FA_vc$isg   <- regexpr(":Env!G.",FA_vc$VC)
-FA_vc$isfa  <- regexpr(".fa1",FA_vc$VC) 
-FA_vc$group <- NA
-FA_vc[which(FA_vc$isg>1) ,"group"] <- "sigma"
-FA_vc[which(FA_vc$isfa>1),"group"] <- "lambda"
-FA_vc[which(is.na(FA_vc$group)==T),"VC"] <- substr(FA_vc[which(is.na(FA_vc$group)==T),"VC"],1,regexpr('!',FA_vc[which(is.na(FA_vc$group)==T),"VC"])-1)
-FA_vc$VC <- gsub("fa\\(G):Env!G.","",FA_vc$VC)
-FA_vc$VC <- gsub(".var","",FA_vc$VC)
-FA_vc$VC <- gsub(".fa1","",FA_vc$VC)
-FA_vc<-FA_vc[,c(3,1,2,6)]
-colnames(FA_vc) <- c("VC","Estimate","StdErr","group")
+# all VC estimates
+VC1 <- data.table(summary(FAmod)$varcomp,  keep.rownames="CovParm")
+VC2 <- data.table(   aiCI(FAmod),          keep.rownames="CovParm")
+VC  <- VC2[VC1, .(CovParm, LCL, estimate, UCL, std.error),on="CovParm"]
+VC$is_var <- str_detect(VC$CovParm,".var")
+VC$is_FA  <- str_detect(VC$CovParm,"fa\\(G\\):Env")
+VC[, ("type"):= ifelse(VC$is_var, "sigma", "lambda")]
+VC$CovParm[VC$is_FA==F] <- tstrsplit(VC$CovParm[VC$is_FA==F],"!",fixed=T)[[1]]
+VC$CovParm[VC$is_FA]    <- str_match(VC$CovParm[VC$is_FA], levels(dat3$G))
+VC[, names(VC)[2:5]:=round(.SD,4), .SDcols=names(VC)[2:5]]
 
-# Transposed Output
-G_var  <- subset(FA_vc, group=="sigma")[,-c(4)]
-colnames(G_var) <- c("VC","Var_Est","Var_SE")
-G_lam  <- subset(FA_vc, group=="lambda")[,-c(4)]
-colnames(G_lam) <- c("VC","Lambda_Est","Lambda_SE")
-G_lam$Lambda_StdEst <- G_lam$Lambda_Est/(mean(G_lam$Lambda_Est))
-
-FA_out <- merge(G_var, G_lam, by="VC")
-FA_out[,c(2,3,4,5,6)] <- round(FA_out[,c(2,3,4,5,6)],4)
+# FA VC estimates (wide format)
+VCout <- VC[VC$is_FA]
+VCout <- dcast(VCout, CovParm ~ type, value.var=names(VC)[2:5])
+setcolorder(VCout,c(1,grep("sigma" ,names(VCout)),
+                      grep("lambda",names(VCout))))
 
 # t-test for trends
 FA_t_test=summary(FAmod,all=T)$coef.fixed
@@ -59,6 +53,6 @@ FA_wald_test$`Pr(Chisq)` <- ifelse(FA_wald_test$`Pr(Chisq)`<0.0001, "<0.0001",pa
 # Residuals
 dat3$residFA <- FAmod$residuals
 
-write.table(FA_out, paste(dataset,"_FA.txt", sep=""), row.names = F, sep="\t")
+write.table(VCout, paste(dataset,"_FA.txt", sep=""), row.names = F, sep="\t")
 write.table(FA_wald_test, paste(dataset,"_FA_Wald_test.txt", sep=""), row.names = T, sep="\t")
 write.table(dat3, paste(dataset,"_resid_FA.txt", sep=""), row.names = F, sep="\t")

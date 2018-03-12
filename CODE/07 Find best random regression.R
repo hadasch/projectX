@@ -13,8 +13,6 @@ dat3$Y <- as.factor(paste(dat3$Y))
 dat3$sc_ri <- sqrt(dat3$ri-min(dat3$ri))
 dat3$sc_tj <- sqrt(dat3$tj-min(dat3$tj)) 
 
-unique(dat3$ri-min(dat3$ri))
-unique(dat3$tj-min(dat3$tj))
 
 # Set up model construction set
 RP1 <- data.frame(part1 ="random=~ G + L + Y + Y:L + G:L + G:Y + G:Env",

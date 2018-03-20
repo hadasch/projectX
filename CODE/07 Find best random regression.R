@@ -1,5 +1,7 @@
 rm(list = ls())
 require(asreml)
+require(data.table)
+require(stringr)
 options(scipen=4)
 #################
 dataset <- "aman"
@@ -29,7 +31,6 @@ comblist <- matrix(list(),length(cols)+1,1)
 for(i in 1:length(cols)){
   comblist[[i]] <- combn(cols,i)
 }
-
 out_list  <- matrix(list(),6,10)
 
 ###############################
@@ -38,16 +39,15 @@ out_list  <- matrix(list(),6,10)
 # Full model
   # Get Starting Values
   Dmod <- asreml(fixed   = adjmean ~ ri + tj, RP,
-             ran.order = "user",
-             weights = w, start.values = T,
-             family  = asreml.gaussian(dispersion=1.0),
-             control = asreml.control(pworkspace=8e10,workspace=8e8,maxiter=100),
-             data    = dat3) 
+                 ran.order = "user",
+                 weights = w, start.values = T,
+                 family  = asreml.gaussian(dispersion=1.0),
+                 control = asreml.control(pworkspace=8e10,workspace=8e8,maxiter=100),
+                 data    = dat3) 
   
   # Manage Constraints
   Gpar <- Dmod$gammas.table
-  Gpar$setU <- as.numeric(regexpr("sc_",Gpar$Gamma))
-  Gpar[which(Gpar$setU==1),"Constraint"] <- "U"
+  Gpar[str_detect(Gpar$Gamma,"sc_"),"Constraint"] <- "U"
   
   # Fit Model
   Dmod <- asreml(fixed   = adjmean ~ ri + tj, RP,
@@ -58,18 +58,13 @@ out_list  <- matrix(list(),6,10)
              control = asreml.control(pworkspace=8e10,workspace=8e8,maxiter=100),
              data    = dat3) 
   
-  VC      <- summary(Dmod)$varcomp[,c(2,3,5)]
-  VC$name <- substr(rownames(VC),1,regexpr('!',rownames(VC))-1)
+  VC         <- data.table(summary(Dmod)$varcomp[c(2,3,5)], keep.rownames="CovParm")
+  VC$CovParm <- tstrsplit(VC$CovParm,"!",fixed=T)[[1]]
   
-  out <- data.frame(riGL  =round(VC[which(VC$name=="sc_ri:G:L"),  "component"],5),
-                    riGY  =round(VC[which(VC$name=="sc_ri:G:Y"),  "component"],5),
-                    tjGY  =round(VC[which(VC$name=="sc_tj:G:Y"),  "component"],5),
-                    riGYL =round(VC[which(VC$name=="sc_ri:G:Env"),"component"],5),
-                    tjGYL =round(VC[which(VC$name=="sc_tj:G:Env"),"component"],5))
-  
-  out$Conv <- Dmod$converge
-  out$AIC  <- -2*Dmod$loglik + 2*length(Dmod$gammas) 
-  out_list[[6,1]] <- out
+  VCwide <- dcast(VC[str_detect(CovParm,"sc_")], . ~CovParm, value.var = "component")[,-1]
+  VCwide$Conv <- Dmod$converge
+  VCwide$AIC  <- -2*Dmod$loglik + 2*length(Dmod$gammas) 
+  out_list[[6,1]] <- VCwide
   
   regnames <- c("sc_ri:G:L","sc_ri:G:Y","sc_tj:G:Y","sc_ri:G:Env","sc_tj:G:Env")
   
@@ -94,9 +89,8 @@ for (i in 1:length(cols)){
 
     # Manage Constraints
     Gpar <- Dmod$gammas.table
-    Gpar$setU <- as.numeric(regexpr("sc_",Gpar$Gamma))
-    Gpar[which(Gpar$setU==1),"Constraint"] <- "U"
-    Gpar[c(1:6),"component"] <- c(0.06,0.51,0.16,0.03,0.01,0.82)
+    Gpar[str_detect(Gpar$Gamma,"sc_"),"Constraint"] <- "U"
+    Gpar[1:6,"component"] <- c(0.06,0.51,0.16,0.03,0.01,0.82) #starting values
 
     # Fit Model
     Dmod <- asreml(fixed   = adjmean ~ ri + tj, loopRP,
@@ -107,8 +101,8 @@ for (i in 1:length(cols)){
                    control = asreml.control(pworkspace=8e10,workspace=8e8,maxiter=100),
                    data    = dat3) 
     
-    VC      <- summary(Dmod)$varcomp[,c(2,3,5)]
-    VC$name <- substr(rownames(VC),1,regexpr('!',rownames(VC))-1)
+    VC         <- data.table(summary(Dmod)$varcomp[c(2,3,5)], keep.rownames="CovParm")
+    VC$CovParm <- tstrsplit(VC$CovParm,"!",fixed=T)[[1]]
 
     out <- data.frame(riGL  =if(loopRP1[,2]!=""){"yes"}else{""},
                       riGY  =if(loopRP1[,3]!=""){"yes"}else{""},
@@ -117,7 +111,7 @@ for (i in 1:length(cols)){
                       tjGYL =if(loopRP1[,6]!=""){"yes"}else{""})
     
     for (v in 1:5){
-    out[v] <- if(out[v]=="yes"){round(VC[which(VC$name==regnames[v]),"component"],5)}else{""} 
+    out[v] <- if(out[v]=="yes"){round(VC[CovParm==regnames[v],"component"],5)}else{""} 
     }
     
     out$Conv <- Dmod$converge
@@ -128,8 +122,8 @@ for (i in 1:length(cols)){
 }
 
 # Handle Output
-output <- do.call(rbind.data.frame, out_list)
-output <- output[order(output$AIC),]
+output <- data.table(do.call(rbind.data.frame, out_list))
+setorder(output, AIC)
 output[which(output$Conv==FALSE),"AIC"] <- NA
 write.table(output, 
             paste(dataset,"_ranregselect.txt", sep=""), 

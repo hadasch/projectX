@@ -10,7 +10,7 @@ dataset <- "aman"
 #dataset <- "boro"
 #################
 
-dat3 <- read.delim(paste(dataset,"_means.txt",sep=""))
+dat3 <- fread(paste0(dataset,"_means.txt"), stringsAsFactors = T)
 dat3 <- dat3[order(dat3$G,dat3$Env),]
 dat3$Y <- as.factor(paste(dat3$Y))
 

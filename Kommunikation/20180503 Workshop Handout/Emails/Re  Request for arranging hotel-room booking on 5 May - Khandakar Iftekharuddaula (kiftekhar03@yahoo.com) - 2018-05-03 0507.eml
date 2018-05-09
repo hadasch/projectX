@@ -1,0 +1,250 @@
+Return-Path: <kiftekhar03@yahoo.com>
+Delivered-To: paulschm@uni-hohenheim.de
+Received: from smtp1.rz.uni-hohenheim.de ([144.41.4.41])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	by mailhost2.rz.uni-hohenheim.de with LMTP id AN1nAe586lonJAAAfjZN8A
+	for <paulschm@uni-hohenheim.de>; Thu, 03 May 2018 05:07:26 +0200
+X-Virus-Scanned: amavisd-new at uni-hohenheim.de
+X-Spam-Flag: NO
+X-Spam-Score: 0.888
+X-Spam-Level: 
+X-Spam-Status: No, score=0.888 tagged_above=0 required=5
+	tests=[CT_MULTIPART=-0.001, CT_MULTIPART_ALT=-0.002, CT_TEXT=0.001,
+	CT_TEXT_HTML=0.001, CT_TEXT_PLAIN=-0.002, DKIM_SIGNED=0.1,
+	DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, FREEMAIL_ENVFROM_END_DIGIT=0.25,
+	FREEMAIL_FROM=0.001, FREEMAIL_REPLYTO_END_DIGIT=0.25,
+	HTML_MESSAGE=0.001, RCVD_IN_DNSWL_NONE=-0.0001,
+	REPTO_QUOTE_YAHOO=0.49, SPF_PASS=-0.001] autolearn=disabled
+Received: from sonic312-22.consmr.mail.bf2.yahoo.com (sonic312-22.consmr.mail.bf2.yahoo.com [74.6.128.84])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(Client did not present a certificate)
+	by smtp1.rz.uni-hohenheim.de (Postfix) with ESMTPS id 72AC2240286
+	for <Paul.Schmidt@uni-hohenheim.de>; Thu,  3 May 2018 05:07:19 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048; t=1525316837; bh=vrhODDNNTCBZ57L7wqJxZabYcAgtsS17z0OjHxWwn4A=; h=Date:From:Reply-To:To:Cc:In-Reply-To:References:Subject:From:Subject; b=ihrhwf73VfX2MA6WjyYT5lV5RTmRWer9ZklnaTQjWV46xsbujK0COwQRTceIFPBf38MZfrD+q1tSFFSXW87INOlGu8gln80cEfnMozWHFozzUhlPNQEXc650LEtobXLWOCC3D810vVeOJ0U/9XA4ReEmzgDpy2jmgZZcuzVYEzVhWC03XUC758KoBOUu8nbwYeh1xdjSnajwoIy/DhskZqF888XclU2Hivj4qS4U+bs9LpD4+2Zpo9q+NRjoJtGbnivcWmGBxMVKIodFas+7XGm3MqR5PaTFZXtSMLxji5hQfvRv2ERW1wE0WI7cRyk/Uc6Yy01g0RqfzsruQWs3Cg==
+X-YMail-OSG: h9dgsFQVM1kQXJLo9PfY18PRuDBcX_AXotml1bLJlhT_hJTSWDQBPLZv4A9bRso
+ 5j.5iaNTN7yGKa3grVx6UJLCSmPnBKkQARf338EuKRtsOg2SzxnxGKRkd2XtWSlAnT6U4VOJ806M
+ pY3sh6WKHbMJNuAe_Su9frBs.Kz5wCTJWMP5v6eKkAedychWF.82hzmb23Bab1A7Igw.TQJ8Oe0s
+ OKoX0fs2PCMBf4IdIheIsqSD.2_rAdeLTB24aHyltBjgqDeKlAXgfMxtgPoG_q8XnWTZh3Ntlhmd
+ YvObNUq8QXa5xLMuwDpVmjiHakRNKojJakaI7ErXZtG8svFrjDVefPDpYRdY8LVXGg7Li2U6x.1z
+ vcXcG7de9.zLS9rDGdTTfnXirU08gaJxq1Gqc5ptM3o7K6Pn.AiJpladE3RZw7iVTfUGUVFgSr_w
+ 7Ixc8GXo1KzQJ9v.tjbV0mslnCtf0vwz6MUZfv.gBdoJT3BjB7us4ZKzvUgA5oFFsdAYfSnLCNTC
+ mdz4h063SeKlSboqkfgRN6NbeggQ3ztmeKNGeEoR4Uk.EzRHmaH1e46U7Rsg0vTl4I7hDE2jPodG
+ FZb_eyHW80UoQhNOJ0jiDX74Gb6MSxSkQcckH6AnknL4NZtRzsJ8jloJnDE5j_Q--
+Received: from sonic.gate.mail.ne1.yahoo.com by sonic312.consmr.mail.bf2.yahoo.com with HTTP; Thu, 3 May 2018 03:07:17 +0000
+Date: Thu, 3 May 2018 03:07:13 +0000 (UTC)
+From: Khandakar Iftekharuddaula <kiftekhar03@yahoo.com>
+Reply-To: "kiftekhar03@yahoo.com" <kiftekhar03@yahoo.com>
+To: 
+	"hans-peter.piepho@uni-hohenheim.de" <hans-peter.piepho@uni-hohenheim.de>
+Cc: "Paul.Schmidt@uni-hohenheim.de" <Paul.Schmidt@uni-hohenheim.de>
+Message-ID: <77890614.3626624.1525316833080@mail.yahoo.com>
+In-Reply-To: <20180502115106.Horde.keUKAYePlT2BC891wFfE4Rv@webmail.uni-hohenheim.de>
+References: <1773662356.1041333.1524716353081.ref@mail.yahoo.com> <1773662356.1041333.1524716353081@mail.yahoo.com> <1168740786.1104975.1524733779600@mail.yahoo.com> <20180502115106.Horde.keUKAYePlT2BC891wFfE4Rv@webmail.uni-hohenheim.de>
+Subject: Re: Request for arranging hotel-room booking on 5 May
+MIME-Version: 1.0
+Content-Type: multipart/alternative; 
+	boundary="----=_Part_3626623_846466377.1525316833078"
+X-Mailer: WebService/1.1.11819 YahooMailAndroidMobile YMobile/1.0 (com.yahoo.mobile.client.android.mail/5.16.3; Android/7.0; NRD90M; a5xelte; samsung; SM-A510F; 5.2; 1920x1080;)
+
+------=_Part_3626623_846466377.1525316833078
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+Dear Dr. Hans-Peter
+Good day. Upon arrival in the airport, please have a look at the hotel plak=
+ard 'Hotel Lakeshore' or your names for hotel transfer. We have arranged ea=
+rly check-in for both of you on 5 May. You are to reside in that hotel on 5=
+ May night. BRRI vehicle will be waiting for you on 6 May at 7:00 AM. Mr. Y=
+eakub Khan or me will be there.p
+We have arranged your lodging in BRRI dormitory on 6 May night. We are to f=
+inish hands-on training on 7 May by first half (13:00 PM).After taking lunc=
+h, you are to start for Dhaka airport. We have arranged all the necessary l=
+ogistics.
+I am sorry for the communication gap as I am now in India attending a confe=
+rence.
+You are welcome in BRRI.
+Best regards
+Pavel
+
+Sent from Yahoo Mail on Android=20
+=20
+  On Wed, May 2, 2018 at 3:51 PM, hans-peter.piepho@uni-hohenheim.de<hans-p=
+eter.piepho@uni-hohenheim.de> wrote:   Dear Pavel,
+
+we just noticed that we are to check out on May 6. As our flight back=C2=A0=
+=20
+to Germany is on May 7, can our booking be extended by one night? Or=C2=A0=
+=20
+will we be lodged at another place from May 6 to may 7?
+
+Just to be sure: I take it the hotel will pick us up from the airport=C2=A0=
+=20
+on May 5. Is that correct?
+
+Thank you very much!
+
+Best wishes
+
+Hans-Peter
+
+Quoting Khandakar Iftekharuddaula <kiftekhar03@yahoo.com>:
+
+> FYI
+>
+> DR. KHANDAKAR MD. IFTEKHARUDDAULA (PAVEL)
+> Principal Scientific Officer
+> Plant Breeding Division
+> Bangladesh Rice Research Institute, Gazipur-1701, Bangladesh
+> Tel: +880-2-9257401-05 Ext.521 (off), 290 (Res)
+> Fax: +880-2-9261110 Cell: +88-01732761747
+>
+>=C2=A0 =C2=A0 ----- Forwarded Message ----- From: Khandakar Iftekharuddaul=
+a=C2=A0=20
+> <kiftekhar03@yahoo.com>To: Shamima Sultana (CO-BD)=C2=A0=20
+> <s.sultana@irri.org>Cc: hans-peter.piepho@unihohenheim.de=C2=A0=20
+> <hans-peter.piepho@unihohenheim.de>; Gary Atlin=C2=A0=20
+> <gary.atlin@gatesfoundation.org>; Mohammad Rafiqul Islam (IRRI)=C2=A0=20
+> <mr.islam@irri.org>; Yeakub Khan <yeakubkhansau@gmail.com>Sent:=C2=A0=20
+> =E2=80=8EThursday=E2=80=8E, =E2=80=8EApril=E2=80=8E =E2=80=8E26=E2=80=8E,=
+ =E2=80=8E2018=E2=80=8E =E2=80=8E10=E2=80=8E:=E2=80=8E19=E2=80=8E:=E2=80=8E=
+13=E2=80=8E =E2=80=8EAM=E2=80=8E =E2=80=8E+06Subject:=C2=A0=20
+> Request for arranging hotel-room booking on 5 May
+>=C2=A0 Dear Ms. Shamima
+> Good day. You are requested to arrange room booking for two persons=C2=A0=
+=20
+> on 5 May 2018 in Lakeshore hotel. The particulars are as follows:
+> Name of the persons: Professor Dr. Hans-peter Piepho and Mr. Paul Schmidt
+> Date of lodging : 05 May 2018
+> Number of rooms required: two
+> Check-in time: around 09:30 to 10:30 AM on 05 May 2018
+> Check-out time: 07:00 AM on 06 May 2018
+> Airport pick-up : Yes
+> Incoming flight: 05May2018/Dubai 02:00 - Dhaka 08:40 EK 582
+> Payment by : TRB-BRRI project
+> Thanking you for your assistance.
+> Best regards,
+>
+> DR. KHANDAKAR MD. IFTEKHARUDDAULA (PAVEL)
+> Principal Scientific Officer
+> Plant Breeding Division
+> Bangladesh Rice Research Institute, Gazipur-1701, Bangladesh
+> Tel: +880-2-9257401-05 Ext.521 (off), 290 (Res)
+> Fax: +880-2-9261110 Cell: +88-01732761747
+
+
+
+--=20
+Prof. Dr. Hans-Peter Piepho
+Biostatistics Unit
+Institute of Crop Science
+Fruwirthstrasse 23
+70599 Stuttgart
+Germany
+phone: +49-711-459-22386
+fax:=C2=A0 +49-711-459-24345
+piepho@uni-hohenheim.de (If this bounces, please use hans.piepho@boku.ac.at=
+)
+
+ =20
+
+------=_Part_3626623_846466377.1525316833078
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+Dear Dr. Hans-Peter<div id=3D"yMail_cursorElementTracker_1525315944164"><br=
+><div id=3D"yMail_cursorElementTracker_1525315236603">Good day. Upon arriva=
+l in the airport, please have a look at the hotel plakard 'Hotel Lakeshore'=
+ or your names for hotel transfer. We have arranged early check-in for both=
+ of you on 5 May. You are to reside in that hotel on 5 May night. BRRI vehi=
+cle will be waiting for you on 6 May at 7:00 AM. Mr. Yeakub Khan or me will=
+ be there.p</div><div id=3D"yMail_cursorElementTracker_1525315996078"><br><=
+/div><div id=3D"yMail_cursorElementTracker_1525315996260">We have arranged =
+your lodging in BRRI dormitory on 6 May night. We are to finish hands-on tr=
+aining on 7 May by first half (13:00 PM).</div><div id=3D"yMail_cursorEleme=
+ntTracker_1525315722706">After taking lunch, you are to start for Dhaka air=
+port. We have arranged all the necessary logistics.</div><div id=3D"yMail_c=
+ursorElementTracker_1525315821569"><br></div><div id=3D"yMail_cursorElement=
+Tracker_1525315821758">I am sorry for the communication gap as I am now in =
+India attending a conference.</div><div id=3D"yMail_cursorElementTracker_15=
+25315886933"><br></div><div id=3D"yMail_cursorElementTracker_1525315887116"=
+>You are welcome in BRRI.</div><div id=3D"yMail_cursorElementTracker_152531=
+5913070"><br></div><div id=3D"yMail_cursorElementTracker_1525315913322">Bes=
+t regards</div><div id=3D"yMail_cursorElementTracker_1525315923845"><br></d=
+iv><div id=3D"yMail_cursorElementTracker_1525315924044">Pavel<br id=3D"yMai=
+l_cursorElementTracker_1525315216032"><br><div id=3D"ymail_android_signatur=
+e"><a href=3D"https://overview.mail.yahoo.com/mobile/?.src=3DAndroid">Sent =
+from Yahoo Mail on Android</a></div> <br> <blockquote style=3D"margin: 0 0 =
+20px 0;"> <header style=3D"font-family:Roboto, sans-serif; color:#6D00F6;">=
+ <div>On Wed, May 2, 2018 at 3:51 PM, hans-peter.piepho@uni-hohenheim.de</d=
+iv><div>&lt;hans-peter.piepho@uni-hohenheim.de&gt; wrote:</div> </header> <=
+div style=3D"padding: 10px 0 0 20px; margin: 10px 0 0 0; border-left: 1px s=
+olid #6D00F6;"> Dear Pavel,<br clear=3D"none"><br clear=3D"none">we just no=
+ticed that we are to check out on May 6. As our flight back&nbsp; <br clear=
+=3D"none">to Germany is on May 7, can our booking be extended by one night?=
+ Or&nbsp; <br clear=3D"none">will we be lodged at another place from May 6 =
+to may 7?<br clear=3D"none"><br clear=3D"none">Just to be sure: I take it t=
+he hotel will pick us up from the airport&nbsp; <br clear=3D"none">on May 5=
+. Is that correct?<br clear=3D"none"><br clear=3D"none">Thank you very much=
+!<br clear=3D"none"><br clear=3D"none">Best wishes<br clear=3D"none"><br cl=
+ear=3D"none">Hans-Peter<br clear=3D"none"><br clear=3D"none">Quoting Khanda=
+kar Iftekharuddaula &lt;<a shape=3D"rect" ymailto=3D"mailto:kiftekhar03@yah=
+oo.com" href=3D"mailto:kiftekhar03@yahoo.com">kiftekhar03@yahoo.com</a>&gt;=
+:<br clear=3D"none"><br clear=3D"none">&gt; FYI<br clear=3D"none">&gt;<br c=
+lear=3D"none">&gt; DR. KHANDAKAR MD. IFTEKHARUDDAULA (PAVEL)<br clear=3D"no=
+ne">&gt; Principal Scientific Officer<br clear=3D"none">&gt; Plant Breeding=
+ Division<br clear=3D"none">&gt; Bangladesh Rice Research Institute, Gazipu=
+r-1701, Bangladesh<br clear=3D"none">&gt; Tel: +880-2-9257401-05 Ext.521 (o=
+ff), 290 (Res)<br clear=3D"none">&gt; Fax: +880-2-9261110 Cell: +88-0173276=
+1747<br clear=3D"none">&gt;<br clear=3D"none">&gt;&nbsp; &nbsp; ----- Forwa=
+rded Message ----- From: Khandakar Iftekharuddaula&nbsp; <br clear=3D"none"=
+>&gt; &lt;<a shape=3D"rect" ymailto=3D"mailto:kiftekhar03@yahoo.com" href=
+=3D"mailto:kiftekhar03@yahoo.com">kiftekhar03@yahoo.com</a>&gt;To: Shamima =
+Sultana (CO-BD)&nbsp; <br clear=3D"none">&gt; &lt;<a shape=3D"rect" ymailto=
+=3D"mailto:s.sultana@irri.org" href=3D"mailto:s.sultana@irri.org">s.sultana=
+@irri.org</a>&gt;Cc: <a shape=3D"rect" ymailto=3D"mailto:hans-peter.piepho@=
+unihohenheim.de" href=3D"mailto:hans-peter.piepho@unihohenheim.de">hans-pet=
+er.piepho@unihohenheim.de</a>&nbsp; <br clear=3D"none">&gt; &lt;<a shape=3D=
+"rect" ymailto=3D"mailto:hans-peter.piepho@unihohenheim.de" href=3D"mailto:=
+hans-peter.piepho@unihohenheim.de">hans-peter.piepho@unihohenheim.de</a>&gt=
+;; Gary Atlin&nbsp; <br clear=3D"none">&gt; &lt;<a shape=3D"rect" ymailto=
+=3D"mailto:gary.atlin@gatesfoundation.org" href=3D"mailto:gary.atlin@gatesf=
+oundation.org">gary.atlin@gatesfoundation.org</a>&gt;; Mohammad Rafiqul Isl=
+am (IRRI)&nbsp; <br clear=3D"none">&gt; &lt;<a shape=3D"rect" ymailto=3D"ma=
+ilto:mr.islam@irri.org" href=3D"mailto:mr.islam@irri.org">mr.islam@irri.org=
+</a>&gt;; Yeakub Khan &lt;<a shape=3D"rect" ymailto=3D"mailto:yeakubkhansau=
+@gmail.com" href=3D"mailto:yeakubkhansau@gmail.com">yeakubkhansau@gmail.com=
+</a>&gt;Sent:&nbsp; <br clear=3D"none">&gt; =E2=80=8EThursday=E2=80=8E, =E2=
+=80=8EApril=E2=80=8E =E2=80=8E26=E2=80=8E, =E2=80=8E2018=E2=80=8E =E2=80=8E=
+10=E2=80=8E:=E2=80=8E19=E2=80=8E:=E2=80=8E13=E2=80=8E =E2=80=8EAM=E2=80=8E =
+=E2=80=8E+06Subject:&nbsp; <br clear=3D"none">&gt; Request for arranging ho=
+tel-room booking on 5 May<br clear=3D"none">&gt;&nbsp; Dear Ms. Shamima<br =
+clear=3D"none">&gt; Good day. You are requested to arrange room booking for=
+ two persons&nbsp; <br clear=3D"none">&gt; on 5 May 2018 in Lakeshore hotel=
+. The particulars are as follows:<br clear=3D"none">&gt; Name of the person=
+s: Professor Dr. Hans-peter Piepho and Mr. Paul Schmidt<br clear=3D"none">&=
+gt; Date of lodging : 05 May 2018<br clear=3D"none">&gt; Number of rooms re=
+quired: two<br clear=3D"none">&gt; Check-in time: around 09:30 to 10:30 AM =
+on 05 May 2018<br clear=3D"none">&gt; Check-out time: 07:00 AM on 06 May 20=
+18<br clear=3D"none">&gt; Airport pick-up : Yes<br clear=3D"none">&gt; Inco=
+ming flight: 05May2018/Dubai 02:00 - Dhaka 08:40 EK 582<br clear=3D"none">&=
+gt; Payment by : TRB-BRRI project<br clear=3D"none">&gt; Thanking you for y=
+our assistance.<br clear=3D"none">&gt; Best regards,<br clear=3D"none">&gt;=
+<br clear=3D"none">&gt; DR. KHANDAKAR MD. IFTEKHARUDDAULA (PAVEL)<br clear=
+=3D"none">&gt; Principal Scientific Officer<br clear=3D"none">&gt; Plant Br=
+eeding Division<br clear=3D"none">&gt; Bangladesh Rice Research Institute, =
+Gazipur-1701, Bangladesh<br clear=3D"none">&gt; Tel: +880-2-9257401-05 Ext.=
+521 (off), 290 (Res)<br clear=3D"none">&gt; Fax: +880-2-9261110 Cell: +88-0=
+1732761747<br clear=3D"none"><br clear=3D"none"><br clear=3D"none"><br clea=
+r=3D"none">-- <br clear=3D"none">Prof. Dr. Hans-Peter Piepho<br clear=3D"no=
+ne">Biostatistics Unit<br clear=3D"none">Institute of Crop Science<br clear=
+=3D"none">Fruwirthstrasse 23<br clear=3D"none">70599 Stuttgart<br clear=3D"=
+none">Germany<br clear=3D"none">phone: +49-711-459-22386<br clear=3D"none">=
+fax:&nbsp;  +49-711-459-24345<div class=3D"yqt1866818414 yQTDBase" id=3D"yq=
+tfd35444"><br clear=3D"none"><a shape=3D"rect" ymailto=3D"mailto:piepho@uni=
+-hohenheim.de" href=3D"mailto:piepho@uni-hohenheim.de">piepho@uni-hohenheim=
+.de</a></div> (If this bounces, please use <a shape=3D"rect" ymailto=3D"mai=
+lto:hans.piepho@boku.ac.at" href=3D"mailto:hans.piepho@boku.ac.at">hans.pie=
+pho@boku.ac.at</a><div class=3D"yqt1866818414 yQTDBase" id=3D"yqtfd99988">)=
+<br clear=3D"none"><br clear=3D"none"></div> </div> </blockquote></div></di=
+v>
+------=_Part_3626623_846466377.1525316833078--

@@ -1,0 +1,519 @@
+Return-Path: <kiftekhar03@yahoo.com>
+Delivered-To: paulschm@uni-hohenheim.de
+Received: from smtp2.rz.uni-hohenheim.de ([144.41.4.42])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	by mailhost2.rz.uni-hohenheim.de with LMTP id +B0+ON5Rx1piYwAAfjZN8A
+	for <paulschm@uni-hohenheim.de>; Fri, 06 Apr 2018 12:54:22 +0200
+X-Virus-Scanned: amavisd-new at uni-hohenheim.de
+X-Spam-Flag: NO
+X-Spam-Score: 0.398
+X-Spam-Level: 
+X-Spam-Status: No, score=0.398 tagged_above=0 required=5
+	tests=[CT_MULTIPART=-0.001, CT_MULTIPART_ALT=-0.002, CT_TEXT=0.001,
+	CT_TEXT_HTML=0.001, CT_TEXT_PLAIN=-0.002, DKIM_SIGNED=0.1,
+	DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, FREEMAIL_ENVFROM_END_DIGIT=0.25,
+	FREEMAIL_FROM=0.001, FREEMAIL_REPLYTO_END_DIGIT=0.25,
+	HTML_MESSAGE=0.001, RCVD_IN_DNSWL_NONE=-0.0001, SPF_PASS=-0.001,
+	T_KAM_HTML_FONT_INVALID=0.01, T_RP_MATCHES_RCVD=-0.01]
+	autolearn=disabled
+Received: from sonic303-3.consmr.mail.bf2.yahoo.com (sonic303-3.consmr.mail.bf2.yahoo.com [74.6.131.42])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(Client did not present a certificate)
+	by smtp2.rz.uni-hohenheim.de (Postfix) with ESMTPS id 5CC4F15C084F
+	for <paul.schmidt@uni-hohenheim.de>; Fri,  6 Apr 2018 12:54:19 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048; t=1523012058; bh=x9Oj7+GqGe7oWSHiOsf3Rg4Qynzyc38A9VJES0Sm7nE=; h=Date:From:Reply-To:To:Cc:In-Reply-To:References:Subject:From:Subject; b=kocmHf5gAqu/NqkirkCg8Lhb0Kjn/oTQf+Mgf1Kh0PW910lAcmKjSeHwVl64FAw7YB1X8/YvJpmloxXrJnaeHYpNWgaTV361lqpuCkK8IvZELwP35AGy5qZBT8OTzjh+H22TRtRsDR1k6+gPJU66UZowZ0gW2/kgRzoCDP6YWBI28bHcpsl6g0ujkpeD1jepYOsEtj8q+qSgvVTAVx86G9XzmKLlolLWX5FJWRotXptXpUEFKOFj5o9+OfzW9Of8XHtDl+yV8V/IoVxd7haH9JqljmrM3Nu5GcygCjJiupmu3ATyHR3UgbOTGVreQTWTcVW14dZRK0RvHGXlaZvjpw==
+X-YMail-OSG: cwJHiyMVM1metUXgmKc1jLXEV6nbJx6cS2RrqWpYm22Qvc35HcT3O3ECG34LgsX
+ cKPkF7u5x66DUjs5DNeXn5AmqAfOFhlo95zQz3QSc.41Bxj6fPzM4QIIGInjmjBFHjQQQaMACox0
+ 3aL.vUNjtoOQ6UVHKGtZjsgVfyWclK7JrSSbiuPZ6t0djnMMaxPR1QMWXziHN3x8ci3wmFnvKOaD
+ 6Ldw3nTGI0SjJbimQGq1p2Go0kWNYl73w1oPGESOAhORCzRUWpuFvmFima0JOPhNa7SIFzH0Z57r
+ 9qrU8aYY03RWTedZ_3.28Dj81ICMMWau1G6E2IWjsGpG4yi9ckO_XDTrcFOIZ1jOsyR.aOrPpC3E
+ 8Nbqlet_5YbZwWSpxIrz_Dy_9JQCsMKOBiiNPS4_s1rg952DoQII.WSsaXY6fPgrFlo6I88tw_UM
+ sqcERGE0BvXzEgKrYjBEZkgXFLa8rwt20EbUYBPKxk0Vciwo8c1ui6KAyOQ--
+Received: from sonic.gate.mail.ne1.yahoo.com by sonic303.consmr.mail.bf2.yahoo.com with HTTP; Fri, 6 Apr 2018 10:54:18 +0000
+Date: Fri, 6 Apr 2018 10:54:15 +0000 (UTC)
+From: Khandakar Iftekharuddaula <kiftekhar03@yahoo.com>
+Reply-To: Khandakar Iftekharuddaula <kiftekhar03@yahoo.com>
+To: "Atlin, Gary" <Gary.Atlin@gatesfoundation.org>, 
+	 <hans-peter.piepho@uni-hohenheim.de>
+Cc: paul.schmidt@uni-hohenheim.de, 
+	"Md. Shahjahan Kabir" <kabir.stat@gmail.com>, 
+	Niaz Rahman <niaz.sust@gmail.com>, Mihossain2 <mihossain2@yahoo.com>, 
+	Khandakar Iftekharuddaula <kiftekhar1969@gmail.com>, 
+	Akhlasur Rahman <rakhlasur@yahoo.com>, 
+	"Md. Sazzadur Rahman" <sazzad_73@yahoo.com>, 
+	"Md. Ansar Ali Ali" <maalibrri@yahoo.com>, 
+	"Mohammad Rafiqul Islam (IRRI)" <mr.islam@irri.org>, 
+	Alamgir Hossain <mahbrri2012@gmail.com>
+Message-ID: <138526291.2407137.1523012055320@mail.yahoo.com>
+In-Reply-To: <20180406094721.Horde.omGIEtyMhyjl9uJVi2arBAb@webmail.uni-hohenheim.de>
+References: <2074645008.3824552.1516760517781.ref@mail.yahoo.com> <2074645008.3824552.1516760517781@mail.yahoo.com> <20180125175638.Horde.NP8W2ewGEWx6iFQMA3AKdhG@webmail.uni-hohenheim.de> <3383c526e2b9498bacdc86cfe1f44a35@gatesfoundation.org> <20180131185413.Horde.DDqsx1Fwi21jZ5v2yUW1OkG@webmail.uni-hohenheim.de> <20180213122628.Horde.qjMRkAlwQiz2ea0yJ_Jf_k4@webmail.uni-hohenheim.de> <1759010017.42111.1518526985642@mail.yahoo.com> <20180406094721.Horde.omGIEtyMhyjl9uJVi2arBAb@webmail.uni-hohenheim.de>
+Subject: Re: Sharing Results Framework & visit program in BRRI
+MIME-Version: 1.0
+Content-Type: multipart/alternative; 
+	boundary="----=_Part_2407136_1412377510.1523012055316"
+X-Mailer: WebService/1.1.11701 YMailNorrin Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36 Edge/16.16299
+
+------=_Part_2407136_1412377510.1523012055316
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+Dear Hans-Peter
+Good day. In response to your queries, please find the answers below:
+Only NMF Rahman has some background on R and 'nlme' and 'lme4' packages, ot=
+hers have minimum exposure to R and 'nlme' and 'lme4' packages.
+Nobody among the participants of BRRI have experience on ASReml.
+I think only the agreed author and co-authors will participate in the works=
+hop.
+I will discuss with BRRI management in this regard.
+You are welcome in BRRI.
+Best regards,
+
+DR. KHANDAKAR MD. IFTEKHARUDDAULA (PAVEL)=20
+Principal Scientific Officer=20
+Plant Breeding Division=20
+Bangladesh Rice Research Institute, Gazipur-1701, Bangladesh=20
+Tel: +880-2-9257401-05 Ext.521 (off), 290 (Res)=20
+Fax: +880-2-9261110 Cell: +88-01732761747=20
+
+    On =E2=80=8EFriday=E2=80=8E, =E2=80=8EApril=E2=80=8E =E2=80=8E6=E2=80=
+=8E, =E2=80=8E2018=E2=80=8E =E2=80=8E01=E2=80=8E:=E2=80=8E47=E2=80=8E:=E2=
+=80=8E25=E2=80=8E =E2=80=8EPM=E2=80=8E =E2=80=8E+06, <hans-peter.piepho@uni=
+-hohenheim.de> wrote: =20
+=20
+ Dear Pavel, dear Gary,
+
+Paul Schmidt and myself are preparing for our visit at BRRI in May.=C2=A0=
+=20
+Our idea for the meeting is to give two presentations:
+
+(1) Hans-Peter Piepho on the statistical approach to genetic gain=C2=A0=20
+assessment, essentially based on our 2014 paper
+(2) Paul Schmidt on the implementation in R / ASREML and examples=C2=A0=20
+using the BRRI data
+
+We have a couple of questions in relation to our presentation:
+
+(i) How much background on R can we expect among people attending? Are=C2=
+=A0=20
+people familiar with mixed model packages such as 'nlme' and 'lme4'?
+(ii) Some of the things we would like to do can't be done with these=C2=A0=
+=20
+free R packages but require ASReml-R. Does anyone at BRRI have=C2=A0=20
+experience with ASReml? How much background can we expect?
+(iii) Can you tell us about how many people will be attending?
+
+If you have any suggestions or hints for us to help us prepare that=C2=A0=
+=20
+would be most welcome.
+
+Best wishes
+
+Hans-Peter
+
+Quoting Khandakar Iftekharuddaula <kiftekhar03@yahoo.com>:
+
+> Dear Dr. Hans-Peter
+> Greetings from BRRI!!=C2=A0
+> The week of April 30 seems to be okay for BRRI. Once you finalize=C2=A0=
+=20
+> your schedule, please let us know.
+> We can have Skype call also in sometimes Mid April to prepare the=C2=A0=
+=20
+> detailed schedule of your programme.
+> With best regards,
+> DR. KHANDAKAR MD. IFTEKHARUDDAULA (PAVEL)
+> Principal Scientific Officer
+> Plant Breeding Division
+> Bangladesh Rice Research Institute, Gazipur-1701, Bangladesh
+> Tel: +880-2-9257401-05 Ext.521 (off), 290 (Res)
+> Fax: +880-2-9261110 Cell: +88-01732761747
+>
+>=C2=A0 =C2=A0 On =E2=80=8ETuesday=E2=80=8E, =E2=80=8EFebruary=E2=80=8E =E2=
+=80=8E13=E2=80=8E, =E2=80=8E2018=E2=80=8E =E2=80=8E05=E2=80=8E:=E2=80=8E26=
+=E2=80=8E:=E2=80=8E35=E2=80=8E =E2=80=8EPM=E2=80=8E =E2=80=8E+06,=C2=A0=20
+> hans-peter.piepho@uni-hohenheim.de=C2=A0=20
+> <hans-peter.piepho@uni-hohenheim.de> wrote:
+>
+>=C2=A0 Dear Pavel and Gary,
+>
+> I hope you have seen my e-mail (see below). Does the suggested time=C2=A0
+> slot look okay? Once we fix a time, I can go ahead and book a flight.=C2=
+=A0
+> I might take one or two people in my group with me (Paul Schmidt,=C2=A0
+> Steffen Hadasch).
+>
+> Best wishes
+>
+> Hans-Peter
+>
+> Quoting piepho@uni-hohenheim.de:
+>
+>> Dear Pavel and Gary,
+>>
+>> sorry for my slowness in responding. Yes, that week would work.=C2=A0
+>> Preferably Thursday and/or Friday so I could travel from Germany=C2=A0
+>> Wednesday afternoon or so, hopefully arriving Thursday morning and=C2=A0
+>> so would avoid a clash with my teaching Wednesday morning. Need to=C2=A0
+>> check my flight options yet.
+>>
+>> Hans-Peter
+>>
+>> Quoting Gary Atlin <Gary.Atlin@gatesfoundation.org>:
+>>
+>>> Dear Hans-Peter and Pavel,
+>>>
+>>> Would the week of April 30 work?
+>>>
+>>> Best,
+>>> Gary
+>>>
+>>> -----Original Message-----
+>>> From: hans-peter.piepho@uni-hohenheim.de=C2=A0
+>>> [mailto:hans-peter.piepho@uni-hohenheim.de]
+>>> Sent: Thursday, January 25, 2018 8:57 AM
+>>> To: Khandakar Iftekharuddaula <kiftekhar03@yahoo.com>
+>>> Cc: Gary Atlin <Gary.Atlin@gatesfoundation.org>; Gary Atlin=C2=A0
+>>> <gary.atlin@gmail.com>; hans-peter.piepho@uni-hohenheim.de; Md.=C2=A0
+>>> Ansar Ali Ali <maalibrri@yahoo.com>; Tamal Aditya=C2=A0
+>>> <tamaladitya@yahoo.com>; Md. Shahjahan Kabir=C2=A0
+>>> <kabir.stat@gmail.com>; Alamgir Hossain <mahbrri2012@gmail.com>
+>>> Subject: Re: Sharing Results Framework & visit program in BRRI
+>>>
+>>> Dear Pavel,
+>>>
+>>> thank you very much for putting me in the loop!
+>>>
+>>> We've made some progress doing the trend analysis in ASReml and are=C2=
+=A0
+>>> hoping to be able to send an update soon.
+>>>
+>>> I am traveling all of March and up to mid April so I won't be able=C2=
+=A0
+>>> to make it to the meeting at the suggested time. Some time from mid=C2=
+=A0
+>>> April would work for me.
+>>>
+>>> Best wishes
+>>>
+>>> Hans-Peter
+>>>
+>>>
+>>> Quoting Khandakar Iftekharuddaula <kiftekhar03@yahoo.com>:
+>>>
+>>>> Dear SirsGood day. Project Management Committee meeting of BRRI- TRB
+>>>> was held yesterday with the participation of DG, Director
+>>>> (Administration), Director (Research) and Head, Plant Breeding. We
+>>>> will circulate the minutes soon.
+>>>> For your kind information, BRRI management agreed to share the results
+>>>> framework of TRB-BRRI project with other partners like Africa Rice and
+>>>> ICAR. Dr. Sanjoy along with Drs Eng and Dr Akhtar
+>>>> (Intertek) are coming BRRI this Monday for two days visit.
+>>>> The best time for visiting Boro trials will be first week of April as
+>>>> opined in the meeting. You can come a bit earlier also if this
+>>>> schedule does not suit with you. But I suggest not to go beyond first
+>>>> week of April. BRRI has formed a monitoring committee for overseeing
+>>>> head to head trials. BRRI will later decide about the location of
+>>>> visiting HHT in consultation with you. We will, of course, keep in
+>>>> mind about your security and communication issues.
+>>>> I am keeping Dr Hans-Peter Piepho in this email loop. It will be
+>>>> better if he visits BRRI along with you. Otherwise Dr. Piepho is
+>>>> welcome in BRRI anytime from Mid-March to First week of April as we
+>>>> were thinking. Once the schedule is fixed, we will provide invitation
+>>>> for visa processing.
+>>>> Should you have any queries, pls write me.
+>>>> With best regards
+>>>> Pavel
+>>>>
+>>>> Sent from Yahoo Mail on Android
+>>>
+>>>
+>>>
+>>> --
+>>> Prof. Dr. Hans-Peter Piepho
+>>> Biostatistics Unit
+>>> Institute of Crop Science
+>>> Fruwirthstrasse 23
+>>> 70599 Stuttgart
+>>> Germany
+>>> phone: +49-711-459-22386
+>>> fax:=C2=A0 +49-711-459-24345
+>>> piepho@uni-hohenheim.de
+>>
+>>
+>>
+>> --
+>> Prof. Dr. Hans-Peter Piepho
+>> Biostatistics Unit
+>> Institute of Crop Science
+>> Fruwirthstrasse 23
+>> 70599 Stuttgart
+>> Germany
+>> phone: +49-711-459-22386
+>> fax:=C2=A0 +49-711-459-24345
+>> piepho@uni-hohenheim.de
+>
+>
+>
+> --
+> Prof. Dr. Hans-Peter Piepho
+> Biostatistics Unit
+> Institute of Crop Science
+> Fruwirthstrasse 23
+> 70599 Stuttgart
+> Germany
+> phone: +49-711-459-22386
+> fax:=C2=A0 +49-711-459-24345
+> piepho@uni-hohenheim.de
+
+
+
+--=20
+Prof. Dr. Hans-Peter Piepho
+Biostatistics Unit
+Institute of Crop Science
+Fruwirthstrasse 23
+70599 Stuttgart
+Germany
+phone: +49-711-459-22386
+fax:=C2=A0 +49-711-459-24345
+piepho@uni-hohenheim.de
+
+ =20
+------=_Part_2407136_1412377510.1523012055316
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+<html><head></head><body><div style=3D"font-family:Helvetica Neue, Helvetic=
+a, Arial, sans-serif;font-size:16px;"><div>Dear Hans-Peter</div><div><br></=
+div><div>Good day. In response to your queries, please find the answers bel=
+ow:</div><div><br></div><div>Only NMF Rahman has some background on R and '=
+nlme' and 'lme4' packages, others have minimum exposure to <span><span styl=
+e=3D'font: 400 16px "Helvetica Neue",Helvetica,Arial,sans-serif; text-align=
+: left; color: rgb(0, 0, 0); text-transform: none; text-indent: 0px; letter=
+-spacing: normal; text-decoration: none; word-spacing: 0px; display: inline=
+ !important; white-space: normal; word-wrap: break-word; orphans: 2; float:=
+ none; background-color: transparent;'>R and 'nlme' and 'lme4' packages.</s=
+pan></span></div><div><span><span style=3D'font: 400 16px "Helvetica Neue",=
+Helvetica,Arial,sans-serif; text-align: left; color: rgb(0, 0, 0); text-tra=
+nsform: none; text-indent: 0px; letter-spacing: normal; text-decoration: no=
+ne; word-spacing: 0px; display: inline !important; white-space: normal; wor=
+d-wrap: break-word; orphans: 2; float: none; background-color: transparent;=
+'><br></span></span></div><div><span><span style=3D'font: 400 16px "Helveti=
+ca Neue",Helvetica,Arial,sans-serif; text-align: left; color: rgb(0, 0, 0);=
+ text-transform: none; text-indent: 0px; letter-spacing: normal; text-decor=
+ation: none; word-spacing: 0px; display: inline !important; white-space: no=
+rmal; word-wrap: break-word; orphans: 2; float: none; background-color: tra=
+nsparent;'>Nobody among the participants of BRRI have experience on ASReml.=
+</span></span></div><div><span><span style=3D'font: 400 16px "Helvetica Neu=
+e",Helvetica,Arial,sans-serif; text-align: left; color: rgb(0, 0, 0); text-=
+transform: none; text-indent: 0px; letter-spacing: normal; text-decoration:=
+ none; word-spacing: 0px; display: inline !important; white-space: normal; =
+word-wrap: break-word; orphans: 2; float: none; background-color: transpare=
+nt;'><br></span></span></div><div><span><span style=3D'font: 400 16px "Helv=
+etica Neue",Helvetica,Arial,sans-serif; text-align: left; color: rgb(0, 0, =
+0); text-transform: none; text-indent: 0px; letter-spacing: normal; text-de=
+coration: none; word-spacing: 0px; display: inline !important; white-space:=
+ normal; word-wrap: break-word; orphans: 2; float: none; background-color: =
+transparent;'>I think only the agreed author and co-authors will participat=
+e in the workshop.</span></span></div><div><br></div><div>I will discuss wi=
+th BRRI management in this regard.</div><div><br></div><div>You are welcome=
+ in BRRI.</div><div><br></div><div>Best regards,</div><div><br></div><div><=
+br></div><div class=3D"ydp6b93d173signature"><font color=3D"#a46016" size=
+=3D"2"><b>DR. KHANDAKAR MD. IFTEKHARUDDAULA (PAVEL) </b></font><br><font fa=
+ce=3D"times new roman, new york, times, serif">Principal Scientific Officer
+ <br>Plant Breeding Division
+ <br>Bangladesh Rice Research Institute, Gazipur-1701, Bangladesh
+ <br>Tel: +880-2-9257401-05 Ext.521 (off), 290 (Res)
+ <br>Fax: +880-2-9261110
+ Cell: +88-01732761747</font></div>
+            <div><br></div><div><br></div>
+           =20
+            <div class=3D"yahoo_quoted" id=3D"yahoo_quoted_3376911401">
+                <div style=3D"font-family:'Helvetica Neue', Helvetica, Aria=
+l, sans-serif;font-size:13px;color:#26282a;">
+                   =20
+                    <div>
+                        On =E2=80=8EFriday=E2=80=8E, =E2=80=8EApril=E2=80=
+=8E =E2=80=8E6=E2=80=8E, =E2=80=8E2018=E2=80=8E =E2=80=8E01=E2=80=8E:=E2=80=
+=8E47=E2=80=8E:=E2=80=8E25=E2=80=8E =E2=80=8EPM=E2=80=8E =E2=80=8E+06,  &lt=
+;hans-peter.piepho@uni-hohenheim.de&gt; wrote:
+                    </div>
+                    <div><br></div>
+                    <div><br></div>
+                    <div>Dear Pavel, dear Gary,<br clear=3D"none"><br clear=
+=3D"none">Paul Schmidt and myself are preparing for our visit at BRRI in Ma=
+y.&nbsp; <br clear=3D"none">Our idea for the meeting is to give two present=
+ations:<br clear=3D"none"><br clear=3D"none">(1) Hans-Peter Piepho on the s=
+tatistical approach to genetic gain&nbsp; <br clear=3D"none">assessment, es=
+sentially based on our 2014 paper<br clear=3D"none">(2) Paul Schmidt on the=
+ implementation in R / ASREML and examples&nbsp; <br clear=3D"none">using t=
+he BRRI data<br clear=3D"none"><br clear=3D"none">We have a couple of quest=
+ions in relation to our presentation:<br clear=3D"none"><br clear=3D"none">=
+(i) How much background on R can we expect among people attending? Are&nbsp=
+; <br clear=3D"none">people familiar with mixed model packages such as 'nlm=
+e' and 'lme4'?<br clear=3D"none">(ii) Some of the things we would like to d=
+o can't be done with these&nbsp; <br clear=3D"none">free R packages but req=
+uire ASReml-R. Does anyone at BRRI have&nbsp; <br clear=3D"none">experience=
+ with ASReml? How much background can we expect?<br clear=3D"none">(iii) Ca=
+n you tell us about how many people will be attending?<br clear=3D"none"><b=
+r clear=3D"none">If you have any suggestions or hints for us to help us pre=
+pare that&nbsp; <br clear=3D"none">would be most welcome.<br clear=3D"none"=
+><br clear=3D"none">Best wishes<br clear=3D"none"><br clear=3D"none">Hans-P=
+eter<br clear=3D"none"><br clear=3D"none">Quoting Khandakar Iftekharuddaula=
+ &lt;<a href=3D"mailto:kiftekhar03@yahoo.com" shape=3D"rect" ymailto=3D"mai=
+lto:kiftekhar03@yahoo.com">kiftekhar03@yahoo.com</a>&gt;:<br clear=3D"none"=
+><br clear=3D"none">&gt; Dear Dr. Hans-Peter<br clear=3D"none">&gt; Greetin=
+gs from BRRI!!&nbsp;<br clear=3D"none">&gt; The week of April 30 seems to b=
+e okay for BRRI. Once you finalize&nbsp; <br clear=3D"none">&gt; your sched=
+ule, please let us know.<br clear=3D"none">&gt; We can have Skype call also=
+ in sometimes Mid April to prepare the&nbsp; <br clear=3D"none">&gt; detail=
+ed schedule of your programme.<br clear=3D"none">&gt; With best regards,<br=
+ clear=3D"none">&gt; DR. KHANDAKAR MD. IFTEKHARUDDAULA (PAVEL)<br clear=3D"=
+none">&gt; Principal Scientific Officer<br clear=3D"none">&gt; Plant Breedi=
+ng Division<br clear=3D"none">&gt; Bangladesh Rice Research Institute, Gazi=
+pur-1701, Bangladesh<br clear=3D"none">&gt; Tel: +880-2-9257401-05 Ext.521 =
+(off), 290 (Res)<br clear=3D"none">&gt; Fax: +880-2-9261110 Cell: +88-01732=
+761747<br clear=3D"none">&gt;<br clear=3D"none">&gt;&nbsp; &nbsp;  On =E2=
+=80=8ETuesday=E2=80=8E, =E2=80=8EFebruary=E2=80=8E =E2=80=8E13=E2=80=8E, =
+=E2=80=8E2018=E2=80=8E =E2=80=8E05=E2=80=8E:=E2=80=8E26=E2=80=8E:=E2=80=8E3=
+5=E2=80=8E =E2=80=8EPM=E2=80=8E =E2=80=8E+06,&nbsp; <br clear=3D"none">&gt;=
+ <a href=3D"mailto:hans-peter.piepho@uni-hohenheim.de" shape=3D"rect" ymail=
+to=3D"mailto:hans-peter.piepho@uni-hohenheim.de">hans-peter.piepho@uni-hohe=
+nheim.de</a>&nbsp; <br clear=3D"none">&gt; &lt;<a href=3D"mailto:hans-peter=
+.piepho@uni-hohenheim.de" shape=3D"rect" ymailto=3D"mailto:hans-peter.pieph=
+o@uni-hohenheim.de">hans-peter.piepho@uni-hohenheim.de</a>&gt; wrote:<br cl=
+ear=3D"none">&gt;<br clear=3D"none">&gt;&nbsp; Dear Pavel and Gary,<br clea=
+r=3D"none">&gt;<br clear=3D"none">&gt; I hope you have seen my e-mail (see =
+below). Does the suggested time&nbsp;<br clear=3D"none">&gt; slot look okay=
+? Once we fix a time, I can go ahead and book a flight.&nbsp;<br clear=3D"n=
+one">&gt; I might take one or two people in my group with me (Paul Schmidt,=
+&nbsp;<br clear=3D"none">&gt; Steffen Hadasch).<br clear=3D"none">&gt;<br c=
+lear=3D"none">&gt; Best wishes<br clear=3D"none">&gt;<br clear=3D"none">&gt=
+; Hans-Peter<br clear=3D"none">&gt;<br clear=3D"none">&gt; Quoting <a href=
+=3D"mailto:piepho@uni-hohenheim.de" shape=3D"rect" ymailto=3D"mailto:piepho=
+@uni-hohenheim.de">piepho@uni-hohenheim.de</a>:<br clear=3D"none">&gt;<br c=
+lear=3D"none">&gt;&gt; Dear Pavel and Gary,<br clear=3D"none">&gt;&gt;<br c=
+lear=3D"none">&gt;&gt; sorry for my slowness in responding. Yes, that week =
+would work.&nbsp;<br clear=3D"none">&gt;&gt; Preferably Thursday and/or Fri=
+day so I could travel from Germany&nbsp;<br clear=3D"none">&gt;&gt; Wednesd=
+ay afternoon or so, hopefully arriving Thursday morning and&nbsp;<br clear=
+=3D"none">&gt;&gt; so would avoid a clash with my teaching Wednesday mornin=
+g. Need to&nbsp;<br clear=3D"none">&gt;&gt; check my flight options yet.<br=
+ clear=3D"none">&gt;&gt;<br clear=3D"none">&gt;&gt; Hans-Peter<br clear=3D"=
+none">&gt;&gt;<br clear=3D"none">&gt;&gt; Quoting Gary Atlin &lt;<a href=3D=
+"mailto:Gary.Atlin@gatesfoundation.org" shape=3D"rect" ymailto=3D"mailto:Ga=
+ry.Atlin@gatesfoundation.org">Gary.Atlin@gatesfoundation.org</a>&gt;:<br cl=
+ear=3D"none">&gt;&gt;<br clear=3D"none">&gt;&gt;&gt; Dear Hans-Peter and Pa=
+vel,<br clear=3D"none">&gt;&gt;&gt;<br clear=3D"none">&gt;&gt;&gt; Would th=
+e week of April 30 work?<br clear=3D"none">&gt;&gt;&gt;<br clear=3D"none">&=
+gt;&gt;&gt; Best,<br clear=3D"none">&gt;&gt;&gt; Gary<br clear=3D"none">&gt=
+;&gt;&gt;<br clear=3D"none">&gt;&gt;&gt; -----Original Message-----<br clea=
+r=3D"none">&gt;&gt;&gt; From: <a href=3D"mailto:hans-peter.piepho@uni-hohen=
+heim.de" shape=3D"rect" ymailto=3D"mailto:hans-peter.piepho@uni-hohenheim.d=
+e">hans-peter.piepho@uni-hohenheim.de</a>&nbsp;<br clear=3D"none">&gt;&gt;&=
+gt; [mailto:<a href=3D"mailto:hans-peter.piepho@uni-hohenheim.de" shape=3D"=
+rect" ymailto=3D"mailto:hans-peter.piepho@uni-hohenheim.de">hans-peter.piep=
+ho@uni-hohenheim.de</a>]<br clear=3D"none">&gt;&gt;&gt; Sent: Thursday, Jan=
+uary 25, 2018 8:57 AM<br clear=3D"none">&gt;&gt;&gt; To: Khandakar Iftekhar=
+uddaula &lt;<a href=3D"mailto:kiftekhar03@yahoo.com" shape=3D"rect" ymailto=
+=3D"mailto:kiftekhar03@yahoo.com">kiftekhar03@yahoo.com</a>&gt;<br clear=3D=
+"none">&gt;&gt;&gt; Cc: Gary Atlin &lt;<a href=3D"mailto:Gary.Atlin@gatesfo=
+undation.org" shape=3D"rect" ymailto=3D"mailto:Gary.Atlin@gatesfoundation.o=
+rg">Gary.Atlin@gatesfoundation.org</a>&gt;; Gary Atlin&nbsp;<br clear=3D"no=
+ne">&gt;&gt;&gt; &lt;<a href=3D"mailto:gary.atlin@gmail.com" shape=3D"rect"=
+ ymailto=3D"mailto:gary.atlin@gmail.com">gary.atlin@gmail.com</a>&gt;; <a h=
+ref=3D"mailto:hans-peter.piepho@uni-hohenheim.de" shape=3D"rect" ymailto=3D=
+"mailto:hans-peter.piepho@uni-hohenheim.de">hans-peter.piepho@uni-hohenheim=
+.de</a>; Md.&nbsp;<br clear=3D"none">&gt;&gt;&gt; Ansar Ali Ali &lt;<a href=
+=3D"mailto:maalibrri@yahoo.com" shape=3D"rect" ymailto=3D"mailto:maalibrri@=
+yahoo.com">maalibrri@yahoo.com</a>&gt;; Tamal Aditya&nbsp;<br clear=3D"none=
+">&gt;&gt;&gt; &lt;<a href=3D"mailto:tamaladitya@yahoo.com" shape=3D"rect" =
+ymailto=3D"mailto:tamaladitya@yahoo.com">tamaladitya@yahoo.com</a>&gt;; Md.=
+ Shahjahan Kabir&nbsp;<br clear=3D"none">&gt;&gt;&gt; &lt;<a href=3D"mailto=
+:kabir.stat@gmail.com" shape=3D"rect" ymailto=3D"mailto:kabir.stat@gmail.co=
+m">kabir.stat@gmail.com</a>&gt;; Alamgir Hossain &lt;<a href=3D"mailto:mahb=
+rri2012@gmail.com" shape=3D"rect" ymailto=3D"mailto:mahbrri2012@gmail.com">=
+mahbrri2012@gmail.com</a>&gt;<br clear=3D"none">&gt;&gt;&gt; Subject: Re: S=
+haring Results Framework &amp; visit program in BRRI<br clear=3D"none">&gt;=
+&gt;&gt;<br clear=3D"none">&gt;&gt;&gt; Dear Pavel,<br clear=3D"none">&gt;&=
+gt;&gt;<br clear=3D"none">&gt;&gt;&gt; thank you very much for putting me i=
+n the loop!<br clear=3D"none">&gt;&gt;&gt;<br clear=3D"none">&gt;&gt;&gt; W=
+e've made some progress doing the trend analysis in ASReml and are&nbsp;<br=
+ clear=3D"none">&gt;&gt;&gt; hoping to be able to send an update soon.<br c=
+lear=3D"none">&gt;&gt;&gt;<br clear=3D"none">&gt;&gt;&gt; I am traveling al=
+l of March and up to mid April so I won't be able&nbsp;<br clear=3D"none">&=
+gt;&gt;&gt; to make it to the meeting at the suggested time. Some time from=
+ mid&nbsp;<br clear=3D"none">&gt;&gt;&gt; April would work for me.<br clear=
+=3D"none">&gt;&gt;&gt;<br clear=3D"none">&gt;&gt;&gt; Best wishes<br clear=
+=3D"none">&gt;&gt;&gt;<br clear=3D"none">&gt;&gt;&gt; Hans-Peter<br clear=
+=3D"none">&gt;&gt;&gt;<br clear=3D"none">&gt;&gt;&gt;<br clear=3D"none">&gt=
+;&gt;&gt; Quoting Khandakar Iftekharuddaula &lt;<a href=3D"mailto:kiftekhar=
+03@yahoo.com" shape=3D"rect" ymailto=3D"mailto:kiftekhar03@yahoo.com">kifte=
+khar03@yahoo.com</a>&gt;:<br clear=3D"none">&gt;&gt;&gt;<br clear=3D"none">=
+&gt;&gt;&gt;&gt; Dear SirsGood day. Project Management Committee meeting of=
+ BRRI- TRB<br clear=3D"none">&gt;&gt;&gt;&gt; was held yesterday with the p=
+articipation of DG, Director<br clear=3D"none">&gt;&gt;&gt;&gt; (Administra=
+tion), Director (Research) and Head, Plant Breeding. We<br clear=3D"none">&=
+gt;&gt;&gt;&gt; will circulate the minutes soon.<br clear=3D"none">&gt;&gt;=
+&gt;&gt; For your kind information, BRRI management agreed to share the res=
+ults<br clear=3D"none">&gt;&gt;&gt;&gt; framework of TRB-BRRI project with =
+other partners like Africa Rice and<br clear=3D"none">&gt;&gt;&gt;&gt; ICAR=
+. Dr. Sanjoy along with Drs Eng and Dr Akhtar<br clear=3D"none">&gt;&gt;&gt=
+;&gt; (Intertek) are coming BRRI this Monday for two days visit.<br clear=
+=3D"none">&gt;&gt;&gt;&gt; The best time for visiting Boro trials will be f=
+irst week of April as<br clear=3D"none">&gt;&gt;&gt;&gt; opined in the meet=
+ing. You can come a bit earlier also if this<br clear=3D"none">&gt;&gt;&gt;=
+&gt; schedule does not suit with you. But I suggest not to go beyond first<=
+br clear=3D"none">&gt;&gt;&gt;&gt; week of April. BRRI has formed a monitor=
+ing committee for overseeing<br clear=3D"none">&gt;&gt;&gt;&gt; head to hea=
+d trials. BRRI will later decide about the location of<br clear=3D"none">&g=
+t;&gt;&gt;&gt; visiting HHT in consultation with you. We will, of course, k=
+eep in<br clear=3D"none">&gt;&gt;&gt;&gt; mind about your security and comm=
+unication issues.<br clear=3D"none">&gt;&gt;&gt;&gt; I am keeping Dr Hans-P=
+eter Piepho in this email loop. It will be<br clear=3D"none">&gt;&gt;&gt;&g=
+t; better if he visits BRRI along with you. Otherwise Dr. Piepho is<br clea=
+r=3D"none">&gt;&gt;&gt;&gt; welcome in BRRI anytime from Mid-March to First=
+ week of April as we<br clear=3D"none">&gt;&gt;&gt;&gt; were thinking. Once=
+ the schedule is fixed, we will provide invitation<br clear=3D"none">&gt;&g=
+t;&gt;&gt; for visa processing.<br clear=3D"none">&gt;&gt;&gt;&gt; Should y=
+ou have any queries, pls write me.<br clear=3D"none">&gt;&gt;&gt;&gt; With =
+best regards<br clear=3D"none">&gt;&gt;&gt;&gt; Pavel<br clear=3D"none">&gt=
+;&gt;&gt;&gt;<br clear=3D"none">&gt;&gt;&gt;&gt; Sent from Yahoo Mail on An=
+droid<br clear=3D"none">&gt;&gt;&gt;<br clear=3D"none">&gt;&gt;&gt;<br clea=
+r=3D"none">&gt;&gt;&gt;<br clear=3D"none">&gt;&gt;&gt; --<br clear=3D"none"=
+>&gt;&gt;&gt; Prof. Dr. Hans-Peter Piepho<br clear=3D"none">&gt;&gt;&gt; Bi=
+ostatistics Unit<br clear=3D"none">&gt;&gt;&gt; Institute of Crop Science<b=
+r clear=3D"none">&gt;&gt;&gt; Fruwirthstrasse 23<br clear=3D"none">&gt;&gt;=
+&gt; 70599 Stuttgart<br clear=3D"none">&gt;&gt;&gt; Germany<br clear=3D"non=
+e">&gt;&gt;&gt; phone: +49-711-459-22386<br clear=3D"none">&gt;&gt;&gt; fax=
+:&nbsp; +49-711-459-24345<div class=3D"yqt1768077423" id=3D"yqtfd00764"><br=
+ clear=3D"none">&gt;&gt;&gt; <a href=3D"mailto:piepho@uni-hohenheim.de" sha=
+pe=3D"rect" ymailto=3D"mailto:piepho@uni-hohenheim.de">piepho@uni-hohenheim=
+.de</a><br clear=3D"none">&gt;&gt;<br clear=3D"none">&gt;&gt;<br clear=3D"n=
+one">&gt;&gt;<br clear=3D"none">&gt;&gt; --<br clear=3D"none">&gt;&gt; Prof=
+. Dr. Hans-Peter Piepho<br clear=3D"none">&gt;&gt; Biostatistics Unit<br cl=
+ear=3D"none">&gt;&gt; Institute of Crop Science<br clear=3D"none">&gt;&gt; =
+Fruwirthstrasse 23<br clear=3D"none">&gt;&gt; 70599 Stuttgart<br clear=3D"n=
+one">&gt;&gt; Germany<br clear=3D"none">&gt;&gt; phone: +49-711-459-22386<b=
+r clear=3D"none">&gt;&gt; fax:&nbsp; +49-711-459-24345<br clear=3D"none">&g=
+t;&gt; <a href=3D"mailto:piepho@uni-hohenheim.de" shape=3D"rect" ymailto=3D=
+"mailto:piepho@uni-hohenheim.de">piepho@uni-hohenheim.de</a><br clear=3D"no=
+ne">&gt;<br clear=3D"none">&gt;<br clear=3D"none">&gt;<br clear=3D"none">&g=
+t; --<br clear=3D"none">&gt; Prof. Dr. Hans-Peter Piepho<br clear=3D"none">=
+&gt; Biostatistics Unit<br clear=3D"none">&gt; Institute of Crop Science<br=
+ clear=3D"none">&gt; Fruwirthstrasse 23<br clear=3D"none">&gt; 70599 Stuttg=
+art<br clear=3D"none">&gt; Germany<br clear=3D"none">&gt; phone: +49-711-45=
+9-22386<br clear=3D"none">&gt; fax:&nbsp; +49-711-459-24345<br clear=3D"non=
+e">&gt; <a href=3D"mailto:piepho@uni-hohenheim.de" shape=3D"rect" ymailto=
+=3D"mailto:piepho@uni-hohenheim.de">piepho@uni-hohenheim.de</a><br clear=3D=
+"none"><br clear=3D"none"><br clear=3D"none"><br clear=3D"none">-- <br clea=
+r=3D"none">Prof. Dr. Hans-Peter Piepho<br clear=3D"none">Biostatistics Unit=
+<br clear=3D"none">Institute of Crop Science<br clear=3D"none">Fruwirthstra=
+sse 23<br clear=3D"none">70599 Stuttgart<br clear=3D"none">Germany<br clear=
+=3D"none">phone: +49-711-459-22386<br clear=3D"none">fax:&nbsp;  +49-711-45=
+9-24345<br clear=3D"none"><a href=3D"mailto:piepho@uni-hohenheim.de" shape=
+=3D"rect" ymailto=3D"mailto:piepho@uni-hohenheim.de">piepho@uni-hohenheim.d=
+e</a><br clear=3D"none"><br clear=3D"none"></div></div>
+                </div>
+            </div></div></body></html>
+------=_Part_2407136_1412377510.1523012055316--

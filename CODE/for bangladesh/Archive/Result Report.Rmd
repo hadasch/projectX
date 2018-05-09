@@ -1,0 +1,173 @@
+---
+title: "Yield trend & stability analyses"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+<style>
+.column-left{
+  float: left;
+  width: 50%;
+  text-align: left;
+}
+.column-right{
+  float: right;
+  width: 50%;
+  text-align: left;
+}
+</style>
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+list.data    <- readRDS("list_data.rds")
+list.publish <- readRDS("list_publish.rds")
+library(dplyr)
+library(knitr)
+library(kableExtra)
+options(knitr.table.format = "html")
+```
+
+## Datasets: "aman" & "boro"
+Two datasets (aman, boro) were analyzed. Below, you will find a quick overview for both.
+
+### aman
+```{r dat aman, echo=FALSE}
+dat <- data.table(list.data[["aman"]][[2,1]])[,-c("Env","GG")]
+dat
+summary(dplyr::select_if(dat, is.numeric))
+Filter(Negate(is.null),lapply(dat,levels))
+``` 
+
+### boro
+```{r dat boro, echo=FALSE}
+dat <- data.table(list.data[["boro"]][[2,1]])[,-c("Env","GG")]
+dat
+summary(dplyr::select_if(dat, is.numeric))
+Filter(Negate(is.null),lapply(dat,levels))
+``` 
+
+## Obtain genotype-by-environment (GxE) means
+We then analyze each environment separately in order to obtain adjusted means for the respective genotypes and Smith's weights. Note that (i) we here denote an `Env` as a year-by-location combination and (ii) that we actually did the analysis not on the genotype `G`, but the combination of genotype and group (`Group`), i.e.  `GG`:
+
+```{r analysis, eval=FALSE}
+  for (sel.env in c(1:n.env)){# Loop through environments
+    mod <- lm(formula = Yield ~ GG + Rep,                   # Model for RCBD
+              data    = subset(dat, Env==dat$Env[sel.env])) # Data subset per Env
+    m <- emmeans(mod, "GG")   # Adj. means for GG
+    w <- diag(solve(vcov(m))) # Smith's weights
+  }
+```
+
+We then obtain GxE means that can be plotted:
+
+### aman
+```{r GxE means aman, echo=FALSE}
+list.data[["aman"]][[4,1]][,c("Env", "t.j","r.i", "GG", "adj.mean", "w")]
+```
+
+### boro
+```{r GxE means boro, echo=FALSE}
+list.data[["boro"]][[4,1]][,c("Env", "t.j","r.i", "GG", "adj.mean", "w")]
+```
+
+<div class="column-left">
+### aman
+```{r GxE means plot aman, echo=FALSE}
+list.GxEplots <- readRDS("GxE plots.rds")
+list.GxEplots[[1]][[1]]
+list.GxEplots[[2]][[1]]
+```
+</div>
+
+<div class="column-right">
+### boro
+```{r GxE means plot boro, echo=FALSE}
+list.GxEplots[[1]][[2]]
+list.GxEplots[[2]][[2]]
+```
+</div>
+
+## Our models
+All our models include fixed regression coefficients for the registration year $r_i$ (`ri`) and trial year $t_j$ (`tj`). Their estimates give information about the genetic and agronomic trend, respectively. In the random part of the model we have effects for genotype, year, location and their interaction effects. Note that we here write the three-way interaction `Y:L:G` as `G:Env`. Regarding their syntax, the three model denoted as "Basic", "Shukla" and "FA" deviate only in the way we define this three-way interaction effect:
+
++ `GG:Env` Baisc Model  
++ `at(GG):Env` Shukla Model
++ `fa(GG):Env` FA Model
+
+Thus, e.g. the basic model would be coded as:
+```{r Basic Model, eval=FALSE}
+Basic <- asreml(fixed   = adj.mean ~ r.i + t.j,
+                random  = ~ GG + L + Y + Y:L + L:GG + Y:GG + GG:Env, 
+                weights = w,
+                family  = asreml.gaussian(dispersion=1.0),
+                data    = dat, 
+                ran.order = "user")
+```
+
+## Estimates of regression coefficients for yield trends
+Finally, we obtain estimates and tests for the genetic and agronomic trends: 
+
+<div class="column-left">
+### aman
+```{r regcoeff aman, echo=FALSE}
+r.aman <- list.publish[["aman"]][[1,1]]
+
+kable(r.aman, full_width = F)  %>%
+  kable_styling(bootstrap_options = "striped", full_width = F, position = "left")
+``` 
+</div>
+
+<div class="column-right">
+### boro
+```{r regcoeff boro, echo=FALSE}
+r.boro <- list.publish[["boro"]][[1,1]]
+
+kable(r.boro, full_width = F)  %>%
+  kable_styling(bootstrap_options = "striped", full_width = F, position = "left")
+``` 
+</div>
+
+<div class="column-left">
+```{r modfit aman, echo=FALSE}
+f.aman <- list.publish[["aman"]][[3,1]]
+
+kable(f.aman, full_width = F)  %>%
+  kable_styling(bootstrap_options = "striped", full_width = F, 
+                position = "left", font_size=10)
+``` 
+</div>
+
+<div class="column-right">
+```{r modfit boro, echo=FALSE}
+f.boro <- list.publish[["boro"]][[3,1]]
+
+kable(f.boro, full_width = F)  %>%
+  kable_styling(bootstrap_options = "striped", full_width = F, 
+                position = "left", font_size=10)
+``` 
+</div>
+
+## Estimates of stability variances
+Furthermore, we obtain stability variances for each genotype. We can try to condense the informaion gained via both, the Shukla and FA model, by plotting the results as follows:
+
+<div class="column-left">
+### aman
+```{r stabvar aman, echo=FALSE}
+stabplots <- readRDS("stability plots.rds")
+stabplots[[1]]
+kable(list.publish[[1]][[2,1]], full_width = T) %>%
+  kable_styling(bootstrap_options = "striped", full_width = F, 
+                position = "left", font_size=8)
+``` 
+</div>
+
+<div class="column-right">
+### boro
+```{r stabvar boro, echo=FALSE}
+stabplots[[2]]
+kable(list.publish[[2]][[2,1]], full_width = T) %>%
+  kable_styling(bootstrap_options = "striped", full_width = F, 
+                position = "left", font_size=8)
+``` 
+</div>

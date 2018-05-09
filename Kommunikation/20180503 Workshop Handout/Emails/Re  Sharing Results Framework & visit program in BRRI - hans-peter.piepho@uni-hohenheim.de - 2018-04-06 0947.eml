@@ -1,0 +1,224 @@
+Return-Path: <hans-peter.piepho@uni-hohenheim.de>
+Delivered-To: paulschm@uni-hohenheim.de
+Received: from mailserv.uni-hohenheim.de
+	by mailhost2.rz.uni-hohenheim.de with LMTP id UPcTLAkmx1o0NgAAfjZN8A
+	for <paulschm@uni-hohenheim.de>; Fri, 06 Apr 2018 09:47:21 +0200
+Received: from webmail-a.rz.uni-hohenheim.de (webmail-a.rz.uni-hohenheim.de [144.41.4.93])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by mailserv.uni-hohenheim.de (Postfix) with ESMTPS id AEFFA26043B;
+	Fri,  6 Apr 2018 09:47:21 +0200 (CEST)
+Received: from webmail.uni-hohenheim.de (localhost [127.0.0.1])
+	by webmail-a.rz.uni-hohenheim.de (Postfix) with ESMTP id 8EA13C02D5;
+	Fri,  6 Apr 2018 09:47:21 +0200 (CEST)
+Received: from pc73.pflanzenbau.uni-hohenheim.de
+ (pc73.pflanzenbau.uni-hohenheim.de [144.41.136.92]) by
+ webmail.uni-hohenheim.de (Horde Framework) with HTTPS; Fri, 06 Apr 2018
+ 09:47:21 +0200
+Date: Fri, 06 Apr 2018 09:47:21 +0200
+Message-ID: <20180406094721.Horde.omGIEtyMhyjl9uJVi2arBAb@webmail.uni-hohenheim.de>
+From: hans-peter.piepho@uni-hohenheim.de
+To: Khandakar Iftekharuddaula <kiftekhar03@yahoo.com>, "Atlin, Gary"
+ <Gary.Atlin@gatesfoundation.org>
+Cc: paul.schmidt@uni-hohenheim.de
+Subject: Re: Sharing Results Framework & visit program in BRRI
+References: <2074645008.3824552.1516760517781.ref@mail.yahoo.com>
+ <2074645008.3824552.1516760517781@mail.yahoo.com>
+ <20180125175638.Horde.NP8W2ewGEWx6iFQMA3AKdhG@webmail.uni-hohenheim.de>
+ <3383c526e2b9498bacdc86cfe1f44a35@gatesfoundation.org>
+ <20180131185413.Horde.DDqsx1Fwi21jZ5v2yUW1OkG@webmail.uni-hohenheim.de>
+ <20180213122628.Horde.qjMRkAlwQiz2ea0yJ_Jf_k4@webmail.uni-hohenheim.de>
+ <1759010017.42111.1518526985642@mail.yahoo.com>
+In-Reply-To: <1759010017.42111.1518526985642@mail.yahoo.com>
+User-Agent: Horde Application Framework 5
+Content-Type: text/plain; charset=utf-8; format=flowed; DelSp=Yes
+MIME-Version: 1.0
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+
+Dear Pavel, dear Gary,
+
+Paul Schmidt and myself are preparing for our visit at BRRI in May.  
+Our idea for the meeting is to give two presentations:
+
+(1) Hans-Peter Piepho on the statistical approach to genetic gain  
+assessment, essentially based on our 2014 paper
+(2) Paul Schmidt on the implementation in R / ASREML and examples  
+using the BRRI data
+
+We have a couple of questions in relation to our presentation:
+
+(i) How much background on R can we expect among people attending? Are  
+people familiar with mixed model packages such as 'nlme' and 'lme4'?
+(ii) Some of the things we would like to do can't be done with these  
+free R packages but require ASReml-R. Does anyone at BRRI have  
+experience with ASReml? How much background can we expect?
+(iii) Can you tell us about how many people will be attending?
+
+If you have any suggestions or hints for us to help us prepare that  
+would be most welcome.
+
+Best wishes
+
+Hans-Peter
+
+Quoting Khandakar Iftekharuddaula <kiftekhar03@yahoo.com>:
+
+> Dear Dr. Hans-Peter
+> Greetings from BRRI!! 
+> The week of April 30 seems to be okay for BRRI. Once you finalize  
+> your schedule, please let us know.
+> We can have Skype call also in sometimes Mid April to prepare the  
+> detailed schedule of your programme.
+> With best regards,
+> DR. KHANDAKAR MD. IFTEKHARUDDAULA (PAVEL)
+> Principal Scientific Officer
+> Plant Breeding Division
+> Bangladesh Rice Research Institute, Gazipur-1701, Bangladesh
+> Tel: +880-2-9257401-05 Ext.521 (off), 290 (Res)
+> Fax: +880-2-9261110 Cell: +88-01732761747
+>
+>     On ‎Tuesday‎, ‎February‎ ‎13‎, ‎2018‎ ‎05‎:‎26‎:‎35‎ ‎PM‎ ‎+06,  
+> hans-peter.piepho@uni-hohenheim.de  
+> <hans-peter.piepho@uni-hohenheim.de> wrote:
+>
+>  Dear Pavel and Gary,
+>
+> I hope you have seen my e-mail (see below). Does the suggested time 
+> slot look okay? Once we fix a time, I can go ahead and book a flight. 
+> I might take one or two people in my group with me (Paul Schmidt, 
+> Steffen Hadasch).
+>
+> Best wishes
+>
+> Hans-Peter
+>
+> Quoting piepho@uni-hohenheim.de:
+>
+>> Dear Pavel and Gary,
+>>
+>> sorry for my slowness in responding. Yes, that week would work. 
+>> Preferably Thursday and/or Friday so I could travel from Germany 
+>> Wednesday afternoon or so, hopefully arriving Thursday morning and 
+>> so would avoid a clash with my teaching Wednesday morning. Need to 
+>> check my flight options yet.
+>>
+>> Hans-Peter
+>>
+>> Quoting Gary Atlin <Gary.Atlin@gatesfoundation.org>:
+>>
+>>> Dear Hans-Peter and Pavel,
+>>>
+>>> Would the week of April 30 work?
+>>>
+>>> Best,
+>>> Gary
+>>>
+>>> -----Original Message-----
+>>> From: hans-peter.piepho@uni-hohenheim.de 
+>>> [mailto:hans-peter.piepho@uni-hohenheim.de]
+>>> Sent: Thursday, January 25, 2018 8:57 AM
+>>> To: Khandakar Iftekharuddaula <kiftekhar03@yahoo.com>
+>>> Cc: Gary Atlin <Gary.Atlin@gatesfoundation.org>; Gary Atlin 
+>>> <gary.atlin@gmail.com>; hans-peter.piepho@uni-hohenheim.de; Md. 
+>>> Ansar Ali Ali <maalibrri@yahoo.com>; Tamal Aditya 
+>>> <tamaladitya@yahoo.com>; Md. Shahjahan Kabir 
+>>> <kabir.stat@gmail.com>; Alamgir Hossain <mahbrri2012@gmail.com>
+>>> Subject: Re: Sharing Results Framework & visit program in BRRI
+>>>
+>>> Dear Pavel,
+>>>
+>>> thank you very much for putting me in the loop!
+>>>
+>>> We've made some progress doing the trend analysis in ASReml and are 
+>>> hoping to be able to send an update soon.
+>>>
+>>> I am traveling all of March and up to mid April so I won't be able 
+>>> to make it to the meeting at the suggested time. Some time from mid 
+>>> April would work for me.
+>>>
+>>> Best wishes
+>>>
+>>> Hans-Peter
+>>>
+>>>
+>>> Quoting Khandakar Iftekharuddaula <kiftekhar03@yahoo.com>:
+>>>
+>>>> Dear SirsGood day. Project Management Committee meeting of BRRI- TRB
+>>>> was held yesterday with the participation of DG, Director
+>>>> (Administration), Director (Research) and Head, Plant Breeding. We
+>>>> will circulate the minutes soon.
+>>>> For your kind information, BRRI management agreed to share the results
+>>>> framework of TRB-BRRI project with other partners like Africa Rice and
+>>>> ICAR. Dr. Sanjoy along with Drs Eng and Dr Akhtar
+>>>> (Intertek) are coming BRRI this Monday for two days visit.
+>>>> The best time for visiting Boro trials will be first week of April as
+>>>> opined in the meeting. You can come a bit earlier also if this
+>>>> schedule does not suit with you. But I suggest not to go beyond first
+>>>> week of April. BRRI has formed a monitoring committee for overseeing
+>>>> head to head trials. BRRI will later decide about the location of
+>>>> visiting HHT in consultation with you. We will, of course, keep in
+>>>> mind about your security and communication issues.
+>>>> I am keeping Dr Hans-Peter Piepho in this email loop. It will be
+>>>> better if he visits BRRI along with you. Otherwise Dr. Piepho is
+>>>> welcome in BRRI anytime from Mid-March to First week of April as we
+>>>> were thinking. Once the schedule is fixed, we will provide invitation
+>>>> for visa processing.
+>>>> Should you have any queries, pls write me.
+>>>> With best regards
+>>>> Pavel
+>>>>
+>>>> Sent from Yahoo Mail on Android
+>>>
+>>>
+>>>
+>>> --
+>>> Prof. Dr. Hans-Peter Piepho
+>>> Biostatistics Unit
+>>> Institute of Crop Science
+>>> Fruwirthstrasse 23
+>>> 70599 Stuttgart
+>>> Germany
+>>> phone: +49-711-459-22386
+>>> fax:  +49-711-459-24345
+>>> piepho@uni-hohenheim.de
+>>
+>>
+>>
+>> --
+>> Prof. Dr. Hans-Peter Piepho
+>> Biostatistics Unit
+>> Institute of Crop Science
+>> Fruwirthstrasse 23
+>> 70599 Stuttgart
+>> Germany
+>> phone: +49-711-459-22386
+>> fax:  +49-711-459-24345
+>> piepho@uni-hohenheim.de
+>
+>
+>
+> --
+> Prof. Dr. Hans-Peter Piepho
+> Biostatistics Unit
+> Institute of Crop Science
+> Fruwirthstrasse 23
+> 70599 Stuttgart
+> Germany
+> phone: +49-711-459-22386
+> fax:  +49-711-459-24345
+> piepho@uni-hohenheim.de
+
+
+
+-- 
+Prof. Dr. Hans-Peter Piepho
+Biostatistics Unit
+Institute of Crop Science
+Fruwirthstrasse 23
+70599 Stuttgart
+Germany
+phone: +49-711-459-22386
+fax:   +49-711-459-24345
+piepho@uni-hohenheim.de
+

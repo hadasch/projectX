@@ -1,0 +1,154 @@
+Return-Path: <hans-peter.piepho@uni-hohenheim.de>
+Delivered-To: paulschm@uni-hohenheim.de
+Received: from mailserv.uni-hohenheim.de
+	by mailhost2.rz.uni-hohenheim.de with LMTP id 8J3DHGvY0FrlbwAAfjZN8A
+	for <paulschm@uni-hohenheim.de>; Fri, 13 Apr 2018 18:18:51 +0200
+Received: from webmail-a.rz.uni-hohenheim.de (webmail-a.rz.uni-hohenheim.de [144.41.4.93])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by mailserv.uni-hohenheim.de (Postfix) with ESMTPS id 74C07260404
+	for <paulschm@uni-hohenheim.de>; Fri, 13 Apr 2018 18:18:51 +0200 (CEST)
+Received: from webmail.uni-hohenheim.de (localhost [127.0.0.1])
+	by webmail-a.rz.uni-hohenheim.de (Postfix) with ESMTP id 65BDAA1B2E
+	for <Paul.Schmidt@uni-hohenheim.de>; Fri, 13 Apr 2018 18:18:51 +0200 (CEST)
+Received: from dslb-088-067-134-202.088.067.pools.vodafone-ip.de
+ (dslb-088-067-134-202.088.067.pools.vodafone-ip.de [88.67.134.202]) by
+ webmail.uni-hohenheim.de (Horde Framework) with HTTPS; Fri, 13 Apr 2018
+ 18:18:51 +0200
+Date: Fri, 13 Apr 2018 18:18:51 +0200
+Message-ID: <20180413181851.Horde.AkYqIOdtBZFiY11EYGBdSV1@webmail.uni-hohenheim.de>
+From: hans-peter.piepho@uni-hohenheim.de
+To: Paul Schmidt <Paul.Schmidt@uni-hohenheim.de>
+Subject: Re: Plans for May meeting
+References: <20180412214941.Horde.eLgFVYVX7Sf20qqGM52M25_@webmail.uni-hohenheim.de>
+ <87191993-07e3-8bef-0cba-9817bfc666a0@uni-hohenheim.de>
+In-Reply-To: <87191993-07e3-8bef-0cba-9817bfc666a0@uni-hohenheim.de>
+User-Agent: Horde Application Framework 5
+Content-Type: text/plain; charset=utf-8; format=flowed; DelSp=Yes
+MIME-Version: 1.0
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+
+
+Quoting Paul Schmidt <Paul.Schmidt@uni-hohenheim.de>:
+
+> Hallo Herr Piepho,
+>
+> danke für die weitergeleitete Email. Mir ist allerdings aufgefallen,  
+> dass Sie speziell "open-source" mixed model packages erwähnen.  Ich  
+> habe mich demnach gerade mal wieder dran gesetzt und versucht unsere  
+> asreml-R Analysen in den Syntax von weingstens einem der drei  
+> gängigen MME-packages (sommer, nlme, lme4) zu übersetzen. Es sieht  
+> allerdings nicht so gut aus.
+>
+> Wenn ich das richtig verstanden habe, möchten wir folgende Analysen  
+> der GxE Mittelwerte in R vorführen:
+>
+>  * Trend-Analyse:
+>      o feste Effekte: µ + ri + tj
+>      o zufällige Effekte: Y + L + G + Y:L + YG + L:G + Y:L:G + e
+>      o Fehlervarianz fixiert auf 1 und Smiths's weights aus First Stage
+>  * zusätzlich Stabilitäts-Analyse (erweitert jeweils den zufälligen
+>    Teil des Modells):
+>      o Shukla: at(G):Y:L
+>      o FA: fa(G):Y:L
+>      o Prüfen auf random regressions: ri:G:L, ri:Y:GL usw... (Checken
+>        ob es einen Trend der Stabilitätsvarianzen über die Zeit gibt)
+>
+> Steffens und meines Wissens zufolge sieht es so aus:
+>
+>  * Keins der 3 kann eine FA-Struktur.
+>  * nlme und lme4 können keine Varianzkomponenten fixieren, was zu
+>    Problemen mit der zweistufigen Analyseführt. Bei sommer habe ich
+>    gerade Herrn Covarrubias geschrieben ob meine Vermutung stimmt, dass
+>    ich wenn dann gleich alle VC fixieren muss.
+>  * nlme hat nach auch keinen weights= Befehl
+>  * sommer läuft bereits mit einem Teildatensatz und einem reduzierten
+>    Modell sehr langsam (ist wie gesagt für p>>n gemacht)
+>
+> Falls Sie sich selbst ein Bild von nlme und lme4 machen wollen -  
+> diese Seiten liefern einen relativ guten Vergleich
+>     http://rpsychologist.com/r-guide-longitudinal-lme-lmer
+> https://rstudio-pubs-static.s3.amazonaws.com/6298_c0ae951011144131a8a9b6ba9703fcf5.html
+>
+> Bevor ich jetzt also weitermache, sollten wir wohl mal klären wie  
+> viel Aufwand es Wert ist zu versuchen unsere bereits laufenden  
+> ASREML-R Modelle in open-source package-Syntax zu übersetzten. Vor  
+> allem wenn es nicht vielversprechend aussieht, dass wir Erfolg haben.
+>
+
+Danke für die Prüfung! Ich denke, was sie jetzt schon wissen, reicht,  
+um zu entscheiden, dass wir ASReml verwenden sollten für die Analysen,  
+wo open source nicht geht. Für den Besuch müssen wir allerdings davoin  
+ausgehen, dass die Teilnehmer ASReml nicht haben. Wobei sie ja eine 30  
+Tage Trial version runterladen könnten, oder?
+
+Hans-Peter Piepho
+
+> Beste Grüße
+> Paul Schmidt
+>
+> University of Hohenheim <about:blank>
+>
+> Paul Schmidt / Ph.D. Student in Biostatistics
+> Paul.Schmidt@uni-hohenheim.de  
+> <mailto:Paul.Schmidt@uni-hohenheim.de>/ +49 172 3091577
+>
+> University of Hohenheim
+> Biostatistics (340c) Fruwirthstr. 23, 70599 Stuttgart
+>
+>
+> On 12.04.2018 21:49, hans-peter.piepho@uni-hohenheim.de wrote:
+>
+>> Dear Gary,
+>>
+>> yes, we're arriving Saturday (May 5) morning at 8:40 and will  
+>> depart Mondey (7th) evening at 19.30.
+>>
+>> We're preparing two talks, one in which I'll detail the approach  
+>> and another in which Paul will explain the analyses done so far.  
+>> We're also preparing to show step by step how these analyses can be  
+>> done in R using open-source mixed model packages.
+>>
+>> Best wishes
+>>
+>> Hans-Peter
+>>
+>> Quoting Gary Atlin <Gary.Atlin@gatesfoundation.org>:
+>>
+>>> Dear all,
+>>>
+>>> Can you update me on plans for the May meeting?  My understanding  
+>>> is that Hans-Peter and I will both arrive in Dhaka on May 5.  I  
+>>> would like to spend May 6 reviewing the analyses done to date,  
+>>> considering what else needs to be done, and outlining  
+>>> publications.  You may wish to reserve May 7 for workshops.   
+>>> Pavel, the IRRI office may be planning an additional meeting on  
+>>> monitoring varietal adoption on May 7-8, so we will need to  
+>>> coordinate to ensure that the right people are at each meeting.
+>>>
+>>> I suggest that the Hohenheim team and I stay at the Lakeshore the  
+>>> night of the 5th.  We can decide spend the night of the 6th in the  
+>>> guesthouse as far as I'm concerned.
+>>>
+>>> Best,
+>>> Gary
+>>
+>>
+>>
+>
+> --
+
+
+
+-- 
+Prof. Dr. Hans-Peter Piepho
+Biostatistics Unit
+Institute of Crop Science
+Fruwirthstrasse 23
+70599 Stuttgart
+Germany
+phone: +49-711-459-22386
+fax:   +49-711-459-24345
+piepho@uni-hohenheim.de (If this bounces, please use hans.piepho@boku.ac.at)
+

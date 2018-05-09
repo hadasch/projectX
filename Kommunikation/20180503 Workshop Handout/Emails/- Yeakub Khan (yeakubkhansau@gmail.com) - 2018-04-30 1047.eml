@@ -1,0 +1,156 @@
+Return-Path: <yeakubkhansau@gmail.com>
+Received: from smtp1.rz.uni-hohenheim.de ([144.41.4.41])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	by mailhost2.rz.uni-hohenheim.de with LMTP id qHJAIkLY5lqYYAAAfjZN8A
+	; Mon, 30 Apr 2018 10:48:02 +0200
+X-Virus-Scanned: amavisd-new at uni-hohenheim.de
+Received: from mail-oi0-f68.google.com (mail-oi0-f68.google.com [209.85.218.68])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(Client CN "smtp.gmail.com", Issuer "Google Internet Authority G2" (verified OK))
+	by smtp1.rz.uni-hohenheim.de (Postfix) with ESMTPS id 6F4E024075E;
+	Mon, 30 Apr 2018 10:48:01 +0200 (CEST)
+Received: by mail-oi0-f68.google.com with SMTP id b130-v6so6793206oif.12;
+        Mon, 30 Apr 2018 01:48:01 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:from:date:message-id:subject:to;
+        bh=1WkCbKe70wYue8NNzHZn3KikWP4gskphjZrucMteh7E=;
+        b=rHOf+4jB9Uwe+G4mxhy+3HDYre89sgpxi8mnKBYbyOq1l08Ktb1UOi2mbKLi3HZSEN
+         WhkKZ0ttLxDzwNldUn69LBpnYBAb3+7qLx0f5TGaQHBSkYVLFQvVEEvACOmJUBNnJ9Ru
+         6e41iRdWKNMw6bH6xao/ktZR+jAIEsW1p6c0T5RWwy1IjYVlzza4Nlc0gzmOIRIq4DnM
+         nQqpKd8ZBMrHxUSi29cMP0WZ7ecYnHRLxT9jzIL9K+gVruhcFlhJdJfbpG39AbxQks7y
+         6v23IhXx2W8XlyvSzkonGduaUxTszM6KEXqvvqEPlMAw9OQIfU7x0OZUYbvYXrwMR+JU
+         6G1A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+        bh=1WkCbKe70wYue8NNzHZn3KikWP4gskphjZrucMteh7E=;
+        b=jfesndRGuPSFAINFYN3yNmC8jHwE/CkeBp0Y5b6G6r8nlpeNGs+A5cEwFM3F/zmjC8
+         hWHYBvm0QXCY5A1IGW/UGgUQCWpTB3VtJle8lbBCSXZ6UYngTWl/SLUwMll18xyEnIcx
+         zpUAkUKDsacXJQZdkBK9HF/52lU3AC5oj3Z8CQIAa+4gkVF8FMJOF0ayFeSVvtfPdWhI
+         QWII+pvxDaR2XlSm5XQa2dwV9pLvCveiQBg6RBlWBipyMDJX1Fg55vWLlFjOc3Rvjlk7
+         0+h2GnxonS5fJ1aQFvdbJuGUQ1DmUik0wV7+tI9IPURw9FRLYtgL7hQs6KyKsSDcTHG7
+         TxYw==
+X-Gm-Message-State: ALQs6tC3D4tL6/4rMElVgQ3h3xWGc5CaZldx703H6xQDNbOgGQVmpr2h
+	VXQdi7Z8WZCKGvlwRU6t8bTtp6TVhDpMI6KrLzA=
+X-Google-Smtp-Source: AB8JxZpwTGvCWWHADH4UBFQBlVd4jxP1GR8lYK9Eo+khQ21p7sJuy1K/KH/nolUsnhcAmZ81dlRJEnF3SA0EnX4U6JI=
+X-Received: by 2002:aca:508f:: with SMTP id e137-v6mr6972875oib.22.1525078079671;
+ Mon, 30 Apr 2018 01:47:59 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 2002:a9d:cf4:0:0:0:0:0 with HTTP; Mon, 30 Apr 2018 01:47:59 -0700 (PDT)
+From: Yeakub Khan <yeakubkhansau@gmail.com>
+Date: Mon, 30 Apr 2018 15:17:59 +0630
+Message-ID: <CAHPjngUeKhAeQ6UaXTyhjG5_1Tq0cWhy1Eo0aK+_TCS3FzKwSQ@mail.gmail.com>
+Subject: 
+To: gary.atlin@gatesfoundation.org, kabir.shahjahan@gmail.com, 
+	maalibrri@yahoo.com, tamaladitya2017@gmail.com, 
+	hans-peter.piepho@uni-hohenheim.de, paul.schmidt@uni-hohenheim.de, 
+	mr.islam@irri.org, mahbrri2012@gmail.com, 
+	KHANDAKAR IFTEKHARUDDAULA <kiftekhar03@yahoo.com>, akhlas08@gmail.com, sazzad_73@yahoo.com, 
+	head.stat@brri.gov.bd, niaz.stat@brri.gov.bd
+Content-Type: multipart/alternative; boundary="00000000000031948e056b0ce984"
+
+--00000000000031948e056b0ce984
+Content-Type: text/plain; charset="UTF-8"
+
+ Dear all
+
+Good day, kindly have a look at the attached herewith the pdf copy of
+the *Workshop
+on reviewing analysis, outlining and writing manuscript of Era study*
+
+
+
+
+
+Best regards
+
+Md. Yeakub khan
+Scientific Officer
+TRB-BRRI Project
+Gazipur-1701
+Email: yeakubkhansau@gmail.com
+Cell Phone: 01722-663450
+
+--00000000000031948e056b0ce984
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr">
+
+<div id=3D"gmail-:yv" class=3D"gmail-ii gmail-gt" style=3D"font-size:12.8px=
+;direction:ltr;margin:5px 15px 0px 0px;padding-bottom:5px;color:rgb(34,34,3=
+4);font-family:arial,sans-serif;font-style:normal;font-variant-ligatures:no=
+rmal;font-variant-caps:normal;font-weight:400;letter-spacing:normal;text-al=
+ign:start;text-indent:0px;text-transform:none;white-space:normal;word-spaci=
+ng:0px;background-color:rgb(255,255,255);text-decoration-style:initial;text=
+-decoration-color:initial"><div id=3D"gmail-:14i" class=3D"gmail-a3s gmail-=
+aXjCH gmail-m16315b6550b0d06a" style=3D"overflow:hidden"><div dir=3D"ltr">D=
+ear all<div><br></div><div>Good day, kindly have a look at the attached her=
+ewith the pdf copy of the<span>=C2=A0</span><b><span style=3D"font-size:11p=
+t;font-family:&quot;Times New Roman&quot;,serif">Workshop on reviewing anal=
+ysis, outlining and writing manuscript of Era study</span></b>=C2=A0</div><=
+div><b><span style=3D"font-size:11pt;font-family:&quot;Times New Roman&quot=
+;,serif"><br></span></b></div><div><b><span style=3D"font-size:11pt;font-fa=
+mily:&quot;Times New Roman&quot;,serif"><br></span></b></div><div><b><span =
+style=3D"font-size:11pt;font-family:&quot;Times New Roman&quot;,serif"><br>=
+</span></b></div><div><b><span style=3D"font-size:11pt;font-family:&quot;Ti=
+mes New Roman&quot;,serif"><br></span></b></div><div><b><span style=3D"font=
+-size:11pt;font-family:&quot;Times New Roman&quot;,serif"><br></span></b></=
+div><div><div style=3D"color:rgb(34,34,34);font-family:arial,sans-serif;fon=
+t-size:12.8px;font-style:normal;font-variant-ligatures:normal;font-variant-=
+caps:normal;font-weight:400;letter-spacing:normal;text-align:start;text-ind=
+ent:0px;text-transform:none;white-space:normal;word-spacing:0px;background-=
+color:rgb(255,255,255);text-decoration-style:initial;text-decoration-color:=
+initial">Best regards</div><div style=3D"color:rgb(34,34,34);font-family:ar=
+ial,sans-serif;font-size:12.8px;font-style:normal;font-variant-ligatures:no=
+rmal;font-variant-caps:normal;font-weight:400;letter-spacing:normal;text-al=
+ign:start;text-indent:0px;text-transform:none;white-space:normal;word-spaci=
+ng:0px;background-color:rgb(255,255,255);text-decoration-style:initial;text=
+-decoration-color:initial"><br></div><div style=3D"color:rgb(34,34,34);font=
+-family:arial,sans-serif;font-size:12.8px;font-style:normal;font-variant-li=
+gatures:normal;font-variant-caps:normal;font-weight:400;letter-spacing:norm=
+al;text-align:start;text-indent:0px;text-transform:none;white-space:normal;=
+word-spacing:0px;background-color:rgb(255,255,255);text-decoration-style:in=
+itial;text-decoration-color:initial">Md. Yeakub khan</div><div style=3D"col=
+or:rgb(34,34,34);font-family:arial,sans-serif;font-size:12.8px;font-style:n=
+ormal;font-variant-ligatures:normal;font-variant-caps:normal;font-weight:40=
+0;letter-spacing:normal;text-align:start;text-indent:0px;text-transform:non=
+e;white-space:normal;word-spacing:0px;background-color:rgb(255,255,255);tex=
+t-decoration-style:initial;text-decoration-color:initial">Scientific Office=
+r</div><div style=3D"color:rgb(34,34,34);font-family:arial,sans-serif;font-=
+size:12.8px;font-style:normal;font-variant-ligatures:normal;font-variant-ca=
+ps:normal;font-weight:400;letter-spacing:normal;text-align:start;text-inden=
+t:0px;text-transform:none;white-space:normal;word-spacing:0px;background-co=
+lor:rgb(255,255,255);text-decoration-style:initial;text-decoration-color:in=
+itial">TRB-BRRI Project=C2=A0</div><div style=3D"color:rgb(34,34,34);font-f=
+amily:arial,sans-serif;font-size:12.8px;font-style:normal;font-variant-liga=
+tures:normal;font-variant-caps:normal;font-weight:400;letter-spacing:normal=
+;text-align:start;text-indent:0px;text-transform:none;white-space:normal;wo=
+rd-spacing:0px;background-color:rgb(255,255,255);text-decoration-style:init=
+ial;text-decoration-color:initial">Gazipur-1701</div><div style=3D"color:rg=
+b(34,34,34);font-family:arial,sans-serif;font-size:12.8px;font-style:normal=
+;font-variant-ligatures:normal;font-variant-caps:normal;font-weight:400;let=
+ter-spacing:normal;text-align:start;text-indent:0px;text-transform:none;whi=
+te-space:normal;word-spacing:0px;background-color:rgb(255,255,255);text-dec=
+oration-style:initial;text-decoration-color:initial">Email:<span>=C2=A0</sp=
+an><a href=3D"mailto:yeakubkhansau@gmail.com" target=3D"_blank" style=3D"co=
+lor:rgb(17,85,204)">yeakubkhansau@gmail.com</a></div><div style=3D"color:rg=
+b(34,34,34);font-family:arial,sans-serif;font-size:12.8px;font-style:normal=
+;font-variant-ligatures:normal;font-variant-caps:normal;font-weight:400;let=
+ter-spacing:normal;text-align:start;text-indent:0px;text-transform:none;whi=
+te-space:normal;word-spacing:0px;background-color:rgb(255,255,255);text-dec=
+oration-style:initial;text-decoration-color:initial">Cell Phone: 01722-6634=
+50</div><div class=3D"gmail-yj6qo"></div><div class=3D"gmail-adL"><br></div=
+></div></div><div class=3D"gmail-adL"></div></div></div><div class=3D"gmail=
+-hq gmail-gt gmail-a10" id=3D"gmail-:zd" style=3D"margin:15px 0px;clear:bot=
+h;font-size:12.8px;color:rgb(34,34,34);font-family:arial,sans-serif;font-st=
+yle:normal;font-variant-ligatures:normal;font-variant-caps:normal;font-weig=
+ht:400;letter-spacing:normal;text-align:start;text-indent:0px;text-transfor=
+m:none;white-space:normal;word-spacing:0px;background-color:rgb(255,255,255=
+);text-decoration-style:initial;text-decoration-color:initial"><br class=3D=
+"gmail-Apple-interchange-newline">
+
+</div><br></div>
+
+--00000000000031948e056b0ce984--

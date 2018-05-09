@@ -9,7 +9,7 @@
 <meta name="generator" content="pandoc" />
 
 
-<meta name="author" content="pschmidt" />
+<meta name="author" content="Paul Schmidt" />
 
 
 <title>01_import.R</title>
@@ -119,31 +119,34 @@ $(document).ready(function () {
 
 
 <h1 class="title toc-ignore">01_import.R</h1>
-<h4 class="author"><em>pschmidt</em></h4>
-<h4 class="date"><em>Fri Apr 13 21:07:35 2018</em></h4>
+<h4 class="author"><em>Paul Schmidt</em></h4>
+<h4 class="date"><em>April 23rd, 2018</em></h4>
 
 </div>
 
 
-<pre class="r"><code>rm(list = ls()) #clear environment
+<pre class="r"><code># make sure to correctly set working directory with setwd() #
 
-### Individual import and non-uniform changes ###
+### Import
 amanraw &lt;- read.delim(&quot;20171212 Corrected Final GG Aman 09.08.2017.txt&quot;)
 bororaw &lt;- read.delim(&quot;20171212 Corrected Final GG Boro 09.08.2017.txt&quot;)
+
+### individual changes
 amanraw$t.j &lt;- as.numeric(amanraw$Year)
 bororaw$t.j &lt;- as.numeric(substr(bororaw$Year,1,4))
 
-### loop through aman &amp; boro ###
+### prepare lists for loop
 dat.names &lt;- c(&quot;aman&quot;, &quot;boro&quot;)
 list.data &lt;- setNames(as.list(c(NA, NA)), dat.names)
-datasets  &lt;- matrix(list(), 4, 1)
-rownames(datasets) &lt;- c(&quot;plot data raw&quot;, &quot;plot data formatted&quot;, &quot;plot data info&quot;, &quot;GxE means&quot;)
-list.data[[1]] &lt;- datasets; list.data[[1]][[1,1]] &lt;- amanraw
-list.data[[2]] &lt;- datasets; list.data[[2]][[1,1]] &lt;- bororaw
+set.names &lt;- c(&quot;plot data raw&quot;, &quot;plot data formatted&quot;, &quot;plot data info&quot;, &quot;GxE means&quot;)
+datasets  &lt;- setNames(as.list(c(NA, NA, NA, NA)), set.names)
+list.data[[&quot;aman&quot;]] &lt;- datasets; list.data[[&quot;aman&quot;]][[&quot;plot data raw&quot;]] &lt;- amanraw
+list.data[[&quot;boro&quot;]] &lt;- datasets; list.data[[&quot;boro&quot;]][[&quot;plot data raw&quot;]] &lt;- bororaw
 
+### loop through aman &amp; boro
 for (sel.dat in dat.names) {
   
-  d &lt;- list.data[[sel.dat]][[1,1]]
+  d &lt;- list.data[[sel.dat]][[&quot;plot data raw&quot;]]
   
   # format raw data
     d$r.i   &lt;- as.numeric(d$Year.of.release)
@@ -157,13 +160,13 @@ for (sel.dat in dat.names) {
     d &lt;- d[,c(&quot;Y&quot;,&quot;t.j&quot;,&quot;r.i&quot;,&quot;L&quot;,&quot;Env&quot;,&quot;G&quot;,&quot;Rep&quot;,&quot;Group&quot;,&quot;GG&quot;,&quot;Yield&quot;)]
     d &lt;- subset(d, is.na(d$Yield)==F)
     
-  list.data[[sel.dat]][[2,1]] &lt;- d
+    list.data[[sel.dat]][[&quot;plot data formatted&quot;]] &lt;- d
   
-  # export formatted data as text file
-  write.table(x = list.data[[sel.dat]][[2,1]], sep=&quot;\t&quot;,
+  # additinally export formatted data as text file
+  write.table(x = list.data[[sel.dat]][[&quot;plot data formatted&quot;]], sep=&quot;\t&quot;,
               file = paste0(sel.dat,&quot; formatted.txt&quot;))
   
-  # aggregate information on dataset's dimensions
+  # aggregate information on dataset's dimensions and levels
     columns &lt;- names(d)[names(d)!=&quot;Yield&quot;]
     info    &lt;- matrix(list(),length(columns),2)
     rownames(info) &lt;- columns
@@ -173,10 +176,11 @@ for (sel.dat in dat.names) {
       colnames(info) &lt;- c(&quot;number&quot;,&quot;freq_list&quot;)
     }
     
-  list.data[[sel.dat]][[3,1]] &lt;- info
+    list.data[[sel.dat]][[&quot;plot data info&quot;]] &lt;- info
 
 }
 
+### Save output
 saveRDS(list.data, file = &quot;list_data.rds&quot;)</code></pre>
 
 

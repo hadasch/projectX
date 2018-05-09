@@ -1,0 +1,76 @@
+Return-Path: <hans-peter.piepho@uni-hohenheim.de>
+Delivered-To: paulschm@uni-hohenheim.de
+Received: from mailserv.uni-hohenheim.de
+	by mailhost2.rz.uni-hohenheim.de with LMTP id wDCRMlW4z1qsAgAAfjZN8A
+	for <paulschm@uni-hohenheim.de>; Thu, 12 Apr 2018 21:49:41 +0200
+Received: from webmail-a.rz.uni-hohenheim.de (webmail-a.rz.uni-hohenheim.de [144.41.4.93])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by mailserv.uni-hohenheim.de (Postfix) with ESMTPS id C57C02600C9;
+	Thu, 12 Apr 2018 21:49:41 +0200 (CEST)
+Received: from webmail.uni-hohenheim.de (localhost [127.0.0.1])
+	by webmail-a.rz.uni-hohenheim.de (Postfix) with ESMTP id 9AF39ABD4D;
+	Thu, 12 Apr 2018 21:49:41 +0200 (CEST)
+Received: from [87.79.39.178] (87.79.39.178 [87.79.39.178]) by
+ webmail.uni-hohenheim.de (Horde Framework) with HTTPS; Thu, 12 Apr 2018
+ 21:49:41 +0200
+Date: Thu, 12 Apr 2018 21:49:41 +0200
+Message-ID: <20180412214941.Horde.eLgFVYVX7Sf20qqGM52M25_@webmail.uni-hohenheim.de>
+From: hans-peter.piepho@uni-hohenheim.de
+To: Gary Atlin <Gary.Atlin@gatesfoundation.org>
+Cc: KHANDAKAR IFTEKHARUDDAULA <kiftekhar1969@gmail.com>, "Mohammad Rafiqul
+ Islam (IRRI)" <mr.islam@irri.org>, Paul.Schmidt@uni-hohenheim.de
+Subject: Re: Plans for May meeting
+In-Reply-To: <0d9e740a8c5a4c06b1bbf662eaf59dcb@gatesfoundation.org>
+User-Agent: Horde Application Framework 5
+Content-Type: text/plain; charset=utf-8; format=flowed; DelSp=Yes
+MIME-Version: 1.0
+Content-Disposition: inline
+
+Dear Gary,
+
+yes, we're arriving Saturday (May 5) morning at 8:40 and will depart  
+Mondey (7th) evening at 19.30.
+
+We're preparing two talks, one in which I'll detail the approach and  
+another in which Paul will explain the analyses done so far. We're  
+also preparing to show step by step how these analyses can be done in  
+R using open-source mixed model packages.
+
+Best wishes
+
+Hans-Peter
+
+Quoting Gary Atlin <Gary.Atlin@gatesfoundation.org>:
+
+> Dear all,
+>
+> Can you update me on plans for the May meeting?  My understanding is  
+> that Hans-Peter and I will both arrive in Dhaka on May 5.  I would  
+> like to spend May 6 reviewing the analyses done to date, considering  
+> what else needs to be done, and outlining publications.  You may  
+> wish to reserve May 7 for workshops.  Pavel, the IRRI office may be  
+> planning an additional meeting on monitoring varietal adoption on  
+> May 7-8, so we will need to coordinate to ensure that the right  
+> people are at each meeting.
+>
+> I suggest that the Hohenheim team and I stay at the Lakeshore the  
+> night of the 5th.  We can decide spend the night of the 6th in the  
+> guesthouse as far as I'm concerned.
+>
+> Best,
+> Gary
+
+
+
+-- 
+Prof. Dr. Hans-Peter Piepho
+Biostatistics Unit
+Institute of Crop Science
+Fruwirthstrasse 23
+70599 Stuttgart
+Germany
+phone: +49-711-459-22386
+fax:   +49-711-459-24345
+piepho@uni-hohenheim.de (If this bounces, please use hans.piepho@boku.ac.at)
+

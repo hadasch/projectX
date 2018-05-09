@@ -1,0 +1,87 @@
+Return-Path: <hans-peter.piepho@uni-hohenheim.de>
+Delivered-To: paulschm@uni-hohenheim.de
+Received: from mailserv.uni-hohenheim.de
+	by mailhost2.rz.uni-hohenheim.de with LMTP id kPrqApfj0FoBdgAAfjZN8A
+	for <paulschm@uni-hohenheim.de>; Fri, 13 Apr 2018 19:06:31 +0200
+Received: from webmail-a.rz.uni-hohenheim.de (webmail-a.rz.uni-hohenheim.de [144.41.4.93])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by mailserv.uni-hohenheim.de (Postfix) with ESMTPS id F089D260404;
+	Fri, 13 Apr 2018 19:06:30 +0200 (CEST)
+Received: from webmail.uni-hohenheim.de (localhost [127.0.0.1])
+	by webmail-a.rz.uni-hohenheim.de (Postfix) with ESMTP id E1487A283B;
+	Fri, 13 Apr 2018 19:06:30 +0200 (CEST)
+Received: from dslb-088-067-134-202.088.067.pools.vodafone-ip.de
+ (dslb-088-067-134-202.088.067.pools.vodafone-ip.de [88.67.134.202]) by
+ webmail.uni-hohenheim.de (Horde Framework) with HTTPS; Fri, 13 Apr 2018
+ 19:06:30 +0200
+Date: Fri, 13 Apr 2018 19:06:30 +0200
+Message-ID: <20180413190630.Horde.3s2gQek9qjXBcv34-gd3wqA@webmail.uni-hohenheim.de>
+From: hans-peter.piepho@uni-hohenheim.de
+To: Gary Atlin <Gary.Atlin@gatesfoundation.org>
+Cc: KHANDAKAR IFTEKHARUDDAULA <kiftekhar1969@gmail.com>, "Mohammad Rafiqul
+ Islam (IRRI)" <mr.islam@irri.org>, Paul.Schmidt@uni-hohenheim.de
+Subject: Re: Plans for May meeting
+In-Reply-To: <0d9e740a8c5a4c06b1bbf662eaf59dcb@gatesfoundation.org>
+User-Agent: Horde Application Framework 5
+Content-Type: text/plain; charset=utf-8; format=flowed; DelSp=Yes
+MIME-Version: 1.0
+Content-Disposition: inline
+
+Dear all,
+
+we foresee that not all analyses we think should be done can be done  
+with free R packages alone. It will be necessary to also use ASReml-R.
+
+We intend to make a compact presentation in which the approach will be  
+introduced and our analyses presented. This will be the basis to  
+discuss the paper. For those people interested in the details (we  
+expect that not everyone will be interested in this), we can also  
+prepare a more hands-on step-by-step introduction to show how analyses  
+can be implemented in R. If we do this, it would be good if all those  
+interested have the R package installed and ready for use on their  
+laptops. In addition, it would be good if we could use ASReml-R. VSNi  
+have 30-day trial licences. These would need to be ordered from them  
+via their webpage.
+
+https://www.vsni.co.uk/software/trials/
+
+Can this be arranged from the BRRI side?
+
+Best wishes
+
+Hans-Peter Piepho
+
+Quoting Gary Atlin <Gary.Atlin@gatesfoundation.org>:
+
+> Dear all,
+>
+> Can you update me on plans for the May meeting?  My understanding is  
+> that Hans-Peter and I will both arrive in Dhaka on May 5.  I would  
+> like to spend May 6 reviewing the analyses done to date, considering  
+> what else needs to be done, and outlining publications.  You may  
+> wish to reserve May 7 for workshops.  Pavel, the IRRI office may be  
+> planning an additional meeting on monitoring varietal adoption on  
+> May 7-8, so we will need to coordinate to ensure that the right  
+> people are at each meeting.
+>
+> I suggest that the Hohenheim team and I stay at the Lakeshore the  
+> night of the 5th.  We can decide spend the night of the 6th in the  
+> guesthouse as far as I'm concerned.
+>
+> Best,
+> Gary
+
+
+
+-- 
+Prof. Dr. Hans-Peter Piepho
+Biostatistics Unit
+Institute of Crop Science
+Fruwirthstrasse 23
+70599 Stuttgart
+Germany
+phone: +49-711-459-22386
+fax:   +49-711-459-24345
+piepho@uni-hohenheim.de (If this bounces, please use hans.piepho@boku.ac.at)
+

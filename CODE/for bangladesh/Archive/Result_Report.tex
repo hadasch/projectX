@@ -1,0 +1,351 @@
+\documentclass[]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\hypersetup{unicode=true,
+            pdftitle={Results aman \& boro},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{0}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+
+%%% Change title format to be more compact
+\usepackage{titling}
+
+% Create subtitle command for use in maketitle
+\newcommand{\subtitle}[1]{
+  \posttitle{
+    \begin{center}\large#1\end{center}
+    }
+}
+
+\setlength{\droptitle}{-2em}
+  \title{Results aman \& boro}
+  \pretitle{\vspace{\droptitle}\centering\huge}
+  \posttitle{\par}
+  \author{}
+  \preauthor{}\postauthor{}
+  \date{}
+  \predate{}\postdate{}
+
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage[table]{xcolor}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage{colortbl}
+\usepackage{pdflscape}
+\usepackage{tabu}
+\usepackage{threeparttable}
+\usepackage{threeparttablex}
+\usepackage[normalem]{ulem}
+\usepackage{makecell}
+
+\begin{document}
+\maketitle
+
+\subsubsection{Estimates of regression coefficients for performance
+trends}\label{estimates-of-regression-coefficients-for-performance-trends}
+
+Figure 1. aman
+
+Model
+
+Trend
+
+Absolute
+
+SE
+
+p.Value
+
+Basic
+
+Genetic
+
+0.00017
+
+0.008
+
+0.9831
+
+Basic
+
+Agronomic
+
+0.01868
+
+0.020
+
+0.3664
+
+Shukla
+
+Genetic
+
+0.00081
+
+0.008
+
+0.9207
+
+Shukla
+
+Agronomic
+
+0.01774
+
+0.020
+
+0.3864
+
+FA
+
+Genetic
+
+0.00267
+
+0.007
+
+0.7215
+
+FA
+
+Agronomic
+
+-0.03468
+
+0.019
+
+0.0856
+
+Figure 2. boro
+
+Model
+
+Trend
+
+Absolute
+
+SE
+
+p.Value
+
+Basic
+
+Genetic
+
+0.01158
+
+0.003
+
+0.0017
+
+Basic
+
+Agronomic
+
+0.01854
+
+0.024
+
+0.4565
+
+Shukla
+
+Genetic
+
+0.01157
+
+0.003
+
+0.0016
+
+Shukla
+
+Agronomic
+
+0.01748
+
+0.024
+
+0.4803
+
+FA
+
+Genetic
+
+0.01117
+
+0.003
+
+0.0032
+
+FA
+
+Agronomic
+
+0.03486
+
+0.022
+
+0.1447
+
+\subsubsection{Model fit}\label{model-fit}
+
+Figure 3. aman
+
+Model
+
+DF
+
+logLik
+
+-2logLik
+
+AIC
+
+BIC
+
+Basic
+
+7
+
+-318.2619
+
+636.5238
+
+650.5238
+
+691.4115
+
+Shukla
+
+38
+
+-260.5471
+
+521.0942
+
+597.0942
+
+819.0560
+
+FA
+
+69
+
+-175.4813
+
+350.9625
+
+488.9625
+
+891.9984
+
+Figure 4. boro
+
+Model
+
+DF
+
+logLik
+
+-2logLik
+
+AIC
+
+BIC
+
+Basic
+
+7
+
+-338.5273
+
+677.0546
+
+691.0546
+
+732.8859
+
+Shukla
+
+37
+
+-309.4641
+
+618.9283
+
+692.9283
+
+914.0369
+
+FA
+
+67
+
+-268.2691
+
+536.5383
+
+670.5383
+
+1070.9241
+
+
+\end{document}

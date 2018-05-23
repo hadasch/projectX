@@ -1,0 +1,11 @@
+""	Barisal	Bhanga	Comilla	Gazipur	Habiganj	Kustia	Rajshahi	Rangpur	Satkhira	Sonagazi
+Barisal		0,599	0,698	0,641	0,498	0,307	0,544	0,155	0,772	0,548
+Bhanga			0,564	0,247	0,773	0,117	0,48	0,534	0,666	0,322
+Comilla				0,512	0,876	0,387	0,245	0,362	0,797	0,604
+Gazipur					0,516	0,41	0,196	0,134	0,246	0,015
+Habiganj						0,302	0,371	0,734	0,646	0,591
+Kustia							0,013	0,049	0,563	0,007
+Rajshahi								0,633	0,376	-0,149
+Rangpur									0,262	0,012
+Satkhira										0,673
+Sonagazi										

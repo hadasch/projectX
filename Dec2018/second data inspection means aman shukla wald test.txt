@@ -1,0 +1,5 @@
+"","Df","Wald statistic","Pr(Chisq)"
+"(Intercept)",1,558.4565,0
+"tj",1,1.6253,0.2023
+"ri",1,0.8261,0.3634
+"residual (MS)",NA,NA,NA

@@ -22,7 +22,7 @@ ods output estimates=estimates_group solutionf=f_group tests3=tests_group;
 proc mixed data=data lognote;
 weight w;
 class Y L G group; 
-model adjmean= tj ri ri*group group/s;
+model adjmean= group tj ri*group /s noint;
 random Y L G Y*L Y*G G*L; 
 parms (1)(1)(1)(1)(1)(1)(1)/hold=7;
 

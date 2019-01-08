@@ -25,8 +25,16 @@ weight w;
 class Y L G group; 
 model adjmean= tj ri ri*group group/s;
 random Y L G Y*L Y*G G*L; 
-*parms (1)(1)(1)(1)(1)(1)(1)/hold=7;
-parms (0.056)(0.4367)(0.07631)(0.6418)(0.06763)(0.1478)(1)/hold=7;
+parms (0.06650)(0.4372)(0.07853)(0.6418)(0.06763)(0.1480)(1)/hold=7;
+run;
+
+ods output estimates=estimates_group solutionf=f_group tests3=tests_group;
+proc mixed data=data lognote;
+weight w;
+class Y L G group; 
+model adjmean= group tj ri*group /s noint;
+random Y L G Y*L Y*G G*L; 
+parms (0.06650)(0.4372)(0.07853)(0.6418)(0.06763)(0.1480)(1)/hold=7;
 estimate 'ri long vs short'      ri*group 1 -1  0;
 estimate 'ri long vs stress'     ri*group 1  0 -1;
 estimate 'ri short vs stress'    ri*group 0  1 -1;
